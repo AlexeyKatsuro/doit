@@ -1,0 +1,25 @@
+include: package:flutter_lints/flutter.yaml
+
+# See https://dart.dev/guides/language/analysis-options
+analyzer:
+  exclude:
+    - lib/**/*.gr.dart
+    - lib/**/*.gen.dart
+    - lib/**/*.g.dart
+    - test/**/*.mocks.dart
+    - lib/**/*.freezed.dart
+    - lib/**/*.gql.g.dart
+    - lib/src/l10n/
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+  errors:
+    invalid_annotation_target: ignore
+linter:
+  rules:
+    unawaited_futures: true
+    unnecessary_await_in_return: true
+    prefer_constructors_over_static_methods: true
+    sort_constructors_first: true
+    sort_unnamed_constructors_first: true

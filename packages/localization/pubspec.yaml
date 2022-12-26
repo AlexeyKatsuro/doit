@@ -1,0 +1,31 @@
+name: localization
+description: A new Flutter package project.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: '>=2.18.4 <3.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  core:
+    path: ../core
+
+  intl: ^0.17.0 # Add this line
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  analysis_options:
+    path: ../analysis_options
+
+
+flutter:
+  generate: true
+

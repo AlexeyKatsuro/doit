@@ -1,0 +1,12 @@
+name: analysis_options
+description: A package that provides common analysis_options.yaml.
+version: 0.0.1
+
+environment:
+  sdk: '>=2.18.4 <3.0.0'
+
+dependencies:
+  flutter_lints: ^2.0.0
+
+
+
