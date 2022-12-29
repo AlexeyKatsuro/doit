@@ -15,10 +15,13 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(title: const Text('Sign In'),),
+      appBar: AppBar(
+        title: const Text('Sign In'),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Observer(builder: (context) {
@@ -41,7 +44,15 @@ class SignInPage extends StatelessWidget {
                 ),
               );
             }),
-
+            Observer(
+              builder: (context) {
+                return AppButtonFilled.loading(
+                  isLoading: viewModel.isLoading,
+                  onPressed: viewModel.onLoginPressed,
+                  child: const Text('Login'),
+                );
+              }
+            ),
           ].divide(divider: const Gap(10)),
         ),
       ),
