@@ -1,5 +1,3 @@
-import 'package:doit/features/language/change/change_language_dropdown.dart';
-import 'package:doit/features/language/change/change_language_view_model.dart';
 import 'package:doit/features/language/override/language_system_view_model.dart';
 import 'package:doit/features/language/stores/language_store.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -56,47 +54,6 @@ class MyApp extends StatelessWidget {
             }
         );
       },
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Provider<ChangeLanguageViewModel>(
-          create: (context) => injector(),
-          child: Builder(
-              builder: (context) {
-                return ChangeLanguageDropdown(
-                  viewModel: Provider.of(context),
-                );
-              }
-          ),
-        ),
-      ),
     );
   }
 }

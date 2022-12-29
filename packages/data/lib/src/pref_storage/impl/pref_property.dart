@@ -3,10 +3,6 @@
 part of 'pref_storage_impl.dart';
 
 class _PrefProperty<T> extends PrefProperty<T> {
-  final PrefStorageImpl _storage;
-  final String key;
-  final T defaultValue;
-  final PreferenceAdapter<T> adapter;
 
   _PrefProperty(
     this._storage, {
@@ -14,6 +10,10 @@ class _PrefProperty<T> extends PrefProperty<T> {
     required this.defaultValue,
     required this.adapter,
   });
+  final PrefStorageImpl _storage;
+  final String key;
+  final T defaultValue;
+  final PreferenceAdapter<T> adapter;
 
   static _PrefProperty<bool> boolPref(
     PrefStorageImpl storage, {
