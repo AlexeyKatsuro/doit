@@ -1,11 +1,10 @@
-name: bionary
+name: doit
 
 # See docs
 # https://melos.invertase.dev/
 
 packages:
   - packages/**
-  - .
 
 command:
   bootstrap:

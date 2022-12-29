@@ -1,4 +1,4 @@
-name: localization
+name: domain
 description: A new Flutter package project.
 version: 0.0.1
 publish_to: none
@@ -10,22 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
-
-  core:
-    path: ../core
-
-  intl: ^0.17.0
-
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   analysis_options:
     path: ../analysis_options
-
-
-flutter:
-  generate: true
 
