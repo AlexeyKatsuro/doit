@@ -10,6 +10,6 @@ final Injector injector = GetIt.instance;
 @InjectableInit()
 Future<void> initDependencies() async {
   await data.initDependencies(injector);
-  injector.init();
+  await injector.init();
   return injector.allReady(timeout: const Duration(seconds: 1));
 }

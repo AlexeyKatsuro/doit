@@ -2,6 +2,7 @@ import 'package:doit/features/common/stores/text_field_view_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:localization/localization.dart';
 import 'package:mobx/mobx.dart';
+import 'package:domain/domain.dart';
 
 part 'sign_in_view_model.g.dart';
 
@@ -9,6 +10,10 @@ part 'sign_in_view_model.g.dart';
 class SignInViewModel = SignInViewModelBase with _$SignInViewModel;
 
 abstract class SignInViewModelBase with Store {
+  SignInViewModelBase(this._authRepository);
+
+  final AuthRepository _authRepository;
+
   late TextFieldViewModel email = TextFieldViewModel(resetErrorOnChange: true);
 
   late TextFieldViewModel password = TextFieldViewModel(resetErrorOnChange: true);
@@ -22,7 +27,10 @@ abstract class SignInViewModelBase with Store {
   @action
   Future<void> _login() async {
     _isLoading = true;
-    await Future<void>.delayed(const Duration(seconds: 2));
+    try {
+      await _authRepository.signInWithEmailAndPassword(
+          email: email.text.trim(), password: password.text.trim());
+    } catch (e) {}
     _isLoading = false;
   }
 
@@ -41,7 +49,7 @@ abstract class SignInViewModelBase with Store {
   }
 
   void onLoginPressed() {
-    if(_validate()) {
+    if (_validate()) {
       _login();
     }
   }

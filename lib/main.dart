@@ -13,10 +13,7 @@ import 'firebase_options.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Future.wait([
-    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
-    initDependencies(),
-  ]);
+  await initDependencies();
 
   runApp(
     MultiProvider(
@@ -44,15 +41,14 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         if (child == null) return const SizedBox();
         return Provider<LanguageSystemViewModel>(
-          child: child,
-          create: (context) => injector(),
+            child: child,
+            create: (context) => injector(),
             builder: (context, child) {
               return LocaleOverride(
                 viewModel: Provider.of(context),
                 child: child!,
               );
-            }
-        );
+            });
       },
     );
   }

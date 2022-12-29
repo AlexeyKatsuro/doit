@@ -13,6 +13,10 @@ dependencies:
   domain:
     path: ../domain
 
+  # Firebase
+  firebase_core: ^2.4.0
+  firebase_auth: ^4.2.3
+
   injectable: ^2.1.0
   intl: ^0.17.0
   shared_preferences: ^2.0.15
