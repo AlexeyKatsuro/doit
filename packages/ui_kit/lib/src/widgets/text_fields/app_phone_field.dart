@@ -1,0 +1,70 @@
+
+import 'package:flutter/material.dart';
+import 'package:ui_kit/src/utils/merge/index.dart';
+
+import 'app_text_field.dart';
+
+/// Wrapper over [AppTextField] with predefined settings for phone fields.
+class AppPhoneField extends AppTextField {
+  AppPhoneField({
+    required String countyCode,
+    super.key,
+    super.text,
+    super.focusNode,
+    InputDecoration? decoration,
+    super.textInputAction,
+    super.textCapitalization,
+    super.style,
+    super.strutStyle,
+    super.textAlign,
+    super.textAlignVertical,
+    super.textDirection,
+    super.readOnly,
+    super.toolbarOptions,
+    super.showCursor,
+    super.autofocus,
+    super.obscuringCharacter,
+    super.obscureText,
+    super.autocorrect,
+    super.smartDashesType,
+    super.smartQuotesType,
+    super.enableSuggestions,
+    super.maxLines,
+    super.minLines,
+    super.expands,
+    super.maxLength,
+    super.maxLengthEnforcement,
+    super.onChanged,
+    super.onEditingComplete,
+    super.onSubmitted,
+    super.onAppPrivateCommand,
+    super.inputFormatters,
+    super.enabled,
+    super.cursorWidth,
+    super.cursorHeight,
+    super.cursorRadius,
+    super.cursorColor,
+    super.selectionHeightStyle,
+    super.selectionWidthStyle,
+    super.keyboardAppearance,
+    super.scrollPadding,
+    super.dragStartBehavior,
+    super.enableInteractiveSelection,
+    super.selectionControls,
+    super.onTap,
+    super.mouseCursor,
+    super.buildCounter,
+    super.scrollController,
+    super.scrollPhysics,
+    super.clipBehavior,
+    super.restorationId,
+    super.scribbleEnabled,
+    super.enableIMEPersonalizedLearning,
+  }) : super(
+          keyboardType: TextInputType.phone,
+          autofillHints: const [AutofillHints.telephoneNumberNational],
+          decoration: InputDecoration(
+            prefixText: countyCode,
+          ).merge(decoration),
+        );
+}

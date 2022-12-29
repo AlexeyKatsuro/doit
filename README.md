@@ -34,3 +34,24 @@ Run inside /packages folder
 ```shell
 flutter create --template=package NAME
 ```
+
+### Analysis
+
+In the newly created package, replace at pubspec.yaml:
+```diff
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+-  flutter_lints: ^2.0.0
++  analysis_options:
++    path: packages/analysis_options
+```
+
+And at analysis_options.yaml
+```diff
+- include: package:flutter_lints/flutter.yaml
+-
+- # Additional information about this file can be found at
+- # https://dart.dev/guides/language/analysis-options
++ include: package:analysis_options/analysis_options.yaml
+```

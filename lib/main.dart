@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import 'di/dependencies.dart';
 import 'features/language/override/language_override.dart';
+import 'features/navigation/index.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -36,12 +37,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'Flutter Demo',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
       builder: (context, child) {
         if (child == null) return const SizedBox();
         return Provider<LanguageSystemViewModel>(
