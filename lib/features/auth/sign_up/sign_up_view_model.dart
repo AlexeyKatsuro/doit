@@ -1,25 +1,27 @@
 import 'package:doit/features/common/error_handling.dart';
 import 'package:doit/features/common/event.dart';
 import 'package:doit/features/common/stores/text_field_view_model.dart';
-import 'package:doit/features/navigation/index.dart';
+import 'package:doit/features/navigation/router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:localization/localization.dart';
 import 'package:mobx/mobx.dart';
 import 'package:domain/domain.dart';
 
-part 'sign_in_view_model.g.dart';
+part 'sign_up_view_model.g.dart';
 
 @injectable
-class SignInViewModel = SignInViewModelBase with _$SignInViewModel;
+class SignUpViewModel = SignUpViewModelBase with _$SignUpViewModel;
 
-abstract class SignInViewModelBase with Store {
-  SignInViewModelBase(this._authRepository);
+abstract class SignUpViewModelBase with Store {
+  SignUpViewModelBase(this._authRepository);
 
   final AuthRepository _authRepository;
 
   late TextFieldViewModel email = TextFieldViewModel(resetErrorOnChange: true);
 
   late TextFieldViewModel password = TextFieldViewModel(resetErrorOnChange: true);
+
+  late TextFieldViewModel repeatPassword = TextFieldViewModel(resetErrorOnChange: true);
 
   @observable
   Event<UiMessage?> errorEvent = Event(null);
@@ -31,17 +33,17 @@ abstract class SignInViewModelBase with Store {
   bool get isLoading => _isLoading;
 
   @action
-  Future<void> _login() async {
+  Future<void> _register() async {
     _isLoading = true;
     try {
-      await _authRepository.signInWithEmailAndPassword(
+      await _authRepository.createUserWithEmailAndPassword(
         email: email.text.trim(),
         password: password.text.trim(),
       );
-    } on UserNotFoundException catch (error) {
+    } on EmailAlreadyInUseException catch (error) {
       // TODO: l10n
       email.errorMessage = UiMessage.text(error.message);
-    } on WrongPasswordException catch (error) {
+    } on WeakPasswordException catch (error) {
       // TODO: l10n
       password.errorMessage = UiMessage.text(error.message);
     } catch (error) {
@@ -61,16 +63,20 @@ abstract class SignInViewModelBase with Store {
       password.errorMessage = const UiMessageText('Fill password');
       isValid = false;
     }
+    if (password.text != repeatPassword.text) {
+      repeatPassword.errorMessage = const UiMessageText('Passwords doesn\'t match');
+      isValid = false;
+    }
     return isValid;
   }
 
-  void onLoginPressed() {
+  void onRegisterPressed() {
     if (_validate()) {
-      _login();
+      _register();
     }
   }
 
-  void onRegisterPressed() {
-    router.pushNamed('sign-up');
+  void onLoginPressed() {
+    router.goNamed('sign-in');
   }
 }

@@ -6,19 +6,19 @@ import 'package:localization/localization.dart';
 import 'package:mobx/mobx.dart';
 import 'package:ui_kit/ui_kit.dart';
 
-import 'sign_in_view_model.dart';
+import 'sign_up_view_model.dart';
 
-class SignInPage extends StatelessWidget {
-  const SignInPage({super.key, required this.viewModel});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key, required this.viewModel});
 
-  final SignInViewModel viewModel;
+  final SignUpViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign In'),
+        title: const Text('Sign Up'),
       ),
       body: Reactions.single(
         create: (context) => reaction(
@@ -59,15 +59,25 @@ class SignInPage extends StatelessWidget {
                 );
               }),
               Observer(builder: (context) {
+                return AppPasswordField(
+                  text: viewModel.repeatPassword.text,
+                  onChanged: viewModel.repeatPassword.onChanged,
+                  decoration: InputDecoration(
+                    labelText: 'Repeat password',
+                    errorText: viewModel.repeatPassword.errorMessage?.tryLocalize(l10n),
+                  ),
+                );
+              }),
+              Observer(builder: (context) {
                 return AppButtonFilled.loading(
                   isLoading: viewModel.isLoading,
-                  onPressed: viewModel.onLoginPressed,
-                  child: const Text('Login'),
+                  onPressed: viewModel.onRegisterPressed,
+                  child: const Text('Register'),
                 );
               }),
               AppButtonOutlined(
-                onPressed: viewModel.onRegisterPressed,
-                child: const Text('Sign Up'),
+                onPressed: viewModel.onLoginPressed,
+                child: const Text('Sign In'),
               ),
             ].divide(divider: const Gap(10)),
           ),
