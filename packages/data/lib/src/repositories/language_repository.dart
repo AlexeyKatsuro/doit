@@ -5,7 +5,7 @@ import 'package:data/src/pref_storage/pref_storage.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 
-@Singleton(as: LanguageRepository)
+@LazySingleton(as: LanguageRepository)
 class LanguageRepositoryImpl extends LanguageRepository {
   LanguageRepositoryImpl(this.prefStorage);
 

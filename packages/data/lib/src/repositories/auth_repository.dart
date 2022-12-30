@@ -1,10 +1,11 @@
 import 'dart:developer';
 
+import 'package:data/src/dto/index.dart';
 import 'package:domain/domain.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:injectable/injectable.dart';
 
-@lazySingleton
+@LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
   AuthRepositoryImpl(this._firebaseAuth);
 
@@ -18,12 +19,12 @@ class AuthRepositoryImpl extends AuthRepository {
         email: email,
         password: password,
       );
-      return UserCredential();
-    } on fb.FirebaseAuthException catch (e) {
+      return UserCredentialDto(credential: credential);
+    } on fb.FirebaseAuthException catch (e, stackTrace) {
       if (e.code == 'weak-password') {
-        log('The password provided is too weak.');
+        throw Error.throwWithStackTrace(WeakPasswordException(), stackTrace);
       } else if (e.code == 'email-already-in-use') {
-        log('The account already exists for that email.');
+        throw Error.throwWithStackTrace(EmailAlreadyInUseException(), stackTrace);
       }
       rethrow;
     } catch (error, stackTrack) {
@@ -33,17 +34,19 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<void> signInWithEmailAndPassword({required String email, required String password}) async {
+  Future<UserCredential> signInWithEmailAndPassword(
+      {required String email, required String password}) async {
     try {
       final credential = await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-    } on fb.FirebaseAuthException catch (error) {
+      return UserCredentialDto(credential: credential);
+    } on fb.FirebaseAuthException catch (error, stackTrace) {
       if (error.code == 'user-not-found') {
-        print('No user found for that email.');
+        throw Error.throwWithStackTrace(UserNotFoundException(), stackTrace);
       } else if (error.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        throw Error.throwWithStackTrace(WrongPasswordException(), stackTrace);
       }
       rethrow;
     } catch (error, stackTrack) {

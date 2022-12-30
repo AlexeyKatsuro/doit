@@ -2,6 +2,7 @@ import '../localization.dart';
 
 enum AppLocalizationKeys {
   title,
+  errorCommon,
 }
 
 extension AppLocalizationKeysExt on AppLocalizationKeys {
@@ -9,6 +10,8 @@ extension AppLocalizationKeysExt on AppLocalizationKeys {
     switch (this) {
       case AppLocalizationKeys.title:
         return localization.title;
+      case AppLocalizationKeys.errorCommon:
+        return localization.errorCommon;
     }
   }
 

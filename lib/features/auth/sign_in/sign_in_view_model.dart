@@ -1,3 +1,5 @@
+import 'package:doit/features/common/error_handling.dart';
+import 'package:doit/features/common/event.dart';
 import 'package:doit/features/common/stores/text_field_view_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:localization/localization.dart';
@@ -19,6 +21,9 @@ abstract class SignInViewModelBase with Store {
   late TextFieldViewModel password = TextFieldViewModel(resetErrorOnChange: true);
 
   @observable
+  Event<UiMessage?> errorEvent = Event(null);
+
+  @observable
   bool _isLoading = false;
 
   @computed
@@ -29,8 +34,18 @@ abstract class SignInViewModelBase with Store {
     _isLoading = true;
     try {
       await _authRepository.signInWithEmailAndPassword(
-          email: email.text.trim(), password: password.text.trim());
-    } catch (e) {}
+        email: email.text.trim(),
+        password: password.text.trim(),
+      );
+    } on UserNotFoundException catch (error) {
+      // TODO: l10n
+      email.errorMessage = UiMessage.text(error.message);
+    } on WrongPasswordException catch (error) {
+      // TODO: l10n
+      password.errorMessage = UiMessage.text(error.message);
+    } catch (error) {
+      errorEvent = Event(error.toUiMessage());
+    }
     _isLoading = false;
   }
 

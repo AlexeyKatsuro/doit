@@ -120,6 +120,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'English'**
   String get languageEn;
+
+  /// No description provided for @errorCommon.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get errorCommon;
+
+  /// No description provided for @errorActionRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get errorActionRetry;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

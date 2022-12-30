@@ -3,5 +3,7 @@
   "languageLabel": "Язык",
   "languageSystem": "Системный",
   "languageRu": "Русский",
-  "languageEn": "Английский"
+  "languageEn": "Английский",
+  "errorCommon": "Что-то пошло не так",
+  "errorActionRetry": "Повторить"
 }
