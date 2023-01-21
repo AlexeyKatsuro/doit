@@ -2,6 +2,7 @@ import 'package:doit/features/common/error_handling.dart';
 import 'package:doit/features/common/event.dart';
 import 'package:doit/features/common/stores/text_field_view_model.dart';
 import 'package:doit/features/navigation/index.dart';
+import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:localization/localization.dart';
 import 'package:mobx/mobx.dart';
@@ -11,11 +12,11 @@ part 'sign_in_view_model.g.dart';
 
 @injectable
 class SignInViewModel = SignInViewModelBase with _$SignInViewModel;
-
 abstract class SignInViewModelBase with Store {
-  SignInViewModelBase(this._authRepository);
+  SignInViewModelBase(this._authRepository, this._router);
 
   final AuthRepository _authRepository;
+  final GoRouter _router;
 
   late TextFieldViewModel email = TextFieldViewModel(resetErrorOnChange: true);
 
@@ -71,6 +72,6 @@ abstract class SignInViewModelBase with Store {
   }
 
   void onRegisterPressed() {
-    router.pushNamed('sign-up');
+    _router.pushNamed(RouteNames.signUp);
   }
 }

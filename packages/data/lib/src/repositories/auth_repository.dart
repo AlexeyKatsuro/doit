@@ -12,6 +12,19 @@ class AuthRepositoryImpl extends AuthRepository {
   final fb.FirebaseAuth _firebaseAuth;
 
   @override
+  User? getCurrentUser() {
+    final user = _firebaseAuth.currentUser;
+    return user == null ? null : User();
+  }
+
+  @override
+  Stream<User?> observeSignIn() {
+    return _firebaseAuth.authStateChanges().map((fb.User? user) {
+      return user == null ? null : User();
+    });
+  }
+
+  @override
   Future<UserCredential> createUserWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
@@ -56,7 +69,12 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<void> signOut() {
-    return _firebaseAuth.signOut();
+  Future<void> signOut() async {
+    try {
+      await _firebaseAuth.signOut();
+    } catch (error, stackTrack) {
+      log('Error of signOut', error: error, stackTrace: stackTrack);
+      rethrow;
+    }
   }
 }

@@ -5,6 +5,7 @@ name: doit
 
 packages:
   - packages/*
+  - .
 
 command:
   bootstrap:

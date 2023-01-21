@@ -5,5 +5,7 @@
   "languageRu": "Russian",
   "languageEn": "English",
   "errorCommon": "Something went wrong",
-  "errorActionRetry": "Retry"
+  "errorActionRetry": "Retry",
+  "homeNewReminder": "New Reminder",
+  "logout": "Logout"
 }

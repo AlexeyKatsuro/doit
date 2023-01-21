@@ -1,7 +1,6 @@
 import 'package:doit/features/common/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:go_router/go_router.dart';
 import 'package:localization/localization.dart';
 import 'package:mobx/mobx.dart';
 import 'package:ui_kit/ui_kit.dart';

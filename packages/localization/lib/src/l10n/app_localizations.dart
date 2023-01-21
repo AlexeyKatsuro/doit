@@ -132,6 +132,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Retry'**
   String get errorActionRetry;
+
+  /// No description provided for @homeNewReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'New Reminder'**
+  String get homeNewReminder;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -13,6 +13,10 @@ abstract class AuthRepository {
     required String password,
   });
 
+  Stream<User?> observeSignIn();
+
+  User? getCurrentUser();
+
   Future<void> signOut();
 }
 

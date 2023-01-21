@@ -2,10 +2,11 @@ import 'package:doit/features/common/error_handling.dart';
 import 'package:doit/features/common/event.dart';
 import 'package:doit/features/common/stores/text_field_view_model.dart';
 import 'package:doit/features/navigation/router.dart';
+import 'package:domain/domain.dart';
+import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:localization/localization.dart';
 import 'package:mobx/mobx.dart';
-import 'package:domain/domain.dart';
 
 part 'sign_up_view_model.g.dart';
 
@@ -13,7 +14,9 @@ part 'sign_up_view_model.g.dart';
 class SignUpViewModel = SignUpViewModelBase with _$SignUpViewModel;
 
 abstract class SignUpViewModelBase with Store {
-  SignUpViewModelBase(this._authRepository);
+  SignUpViewModelBase(this._authRepository, this._router);
+
+  final GoRouter _router;
 
   final AuthRepository _authRepository;
 
@@ -64,7 +67,7 @@ abstract class SignUpViewModelBase with Store {
       isValid = false;
     }
     if (password.text != repeatPassword.text) {
-      repeatPassword.errorMessage = const UiMessageText('Passwords doesn\'t match');
+      repeatPassword.errorMessage = const UiMessageText("Passwords doesn't match");
       isValid = false;
     }
     return isValid;
@@ -77,6 +80,6 @@ abstract class SignUpViewModelBase with Store {
   }
 
   void onLoginPressed() {
-    router.goNamed('sign-in');
+    _router.goNamed(RouteNames.signIn);
   }
 }
