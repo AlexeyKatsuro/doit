@@ -1,8 +1,9 @@
+import 'package:doit_ui_mocks/features/common/index.dart';
 import 'package:flutter/foundation.dart';
 import 'package:localization/localization.dart';
 import 'package:ui/ui.dart';
 
-class TextFieldViewModelMock extends TextFieldViewModel {
+class TextFieldViewModelMock extends TextFieldViewModel with MockCallbacks{
   TextFieldViewModelMock({
     String? value,
     this.errorMessage,
@@ -15,10 +16,10 @@ class TextFieldViewModelMock extends TextFieldViewModel {
   @override
   final String value;
 
-  @override
+ /* @override
   void onChanged(String value) {
     debugPrint('onChanged $value');
-  }
+  }*/
 
   @override
   final UiMessage? hintMessage;
