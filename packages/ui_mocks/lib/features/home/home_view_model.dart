@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:localization/localization.dart';
 import 'package:ui/ui.dart';
 
-class HomeViewModelMock extends HomeViewModel {
+class HomeViewModelMock extends HomeViewModel with MockCallbacks {
   HomeViewModelMock({
     List<DashboardTileViewModel>? dashboard,
     bool? isEditMode,
@@ -55,44 +55,9 @@ class HomeViewModelMock extends HomeViewModel {
 
   @override
   final List<TaskListTileViewModel> lists;
-
-  @override
-  void onAddGroupPressed() {
-    debugPrint('onAddGroupPressed');
-  }
-
-  @override
-  void onAddListPressed() {
-    debugPrint('onAddListPressed');
-  }
-
-  @override
-  void onAddReminderPressed() {
-    debugPrint('onAddReminderPressed');
-  }
-
-  @override
-  void onDashboardListOrderChanged(List<DashboardTileViewModel> ordered) {
-    debugPrint('onDashboardListOrderChanged:\n$ordered');
-  }
-
-  @override
-  void onTaskListOrderChanged(List<TaskListTileViewModel> ordered) {
-    debugPrint('onTaskListOrderChanged:\n$ordered');
-  }
-
-  @override
-  void onEditListsPressed() {
-    debugPrint('onEditListsPressed');
-  }
-
-  @override
-  void onTemplatesPressed() {
-    debugPrint('onTemplatesPressed');
-  }
 }
 
-class DashboardTileViewModelMock extends DashboardTileViewModel {
+class DashboardTileViewModelMock extends DashboardTileViewModel with MockCallbacks {
   const DashboardTileViewModelMock({
     int? count,
     IconType? icon,
@@ -114,14 +79,9 @@ class DashboardTileViewModelMock extends DashboardTileViewModel {
 
   @override
   final bool selected;
-
-  @override
-  void onPressed() {
-    debugPrint('onPressed');
-  }
 }
 
-class TaskListTileViewModelMock extends TaskListTileViewModel {
+class TaskListTileViewModelMock extends TaskListTileViewModel with MockCallbacks {
   const TaskListTileViewModelMock({
     int? count,
     IconType? icon,
@@ -140,8 +100,4 @@ class TaskListTileViewModelMock extends TaskListTileViewModel {
   @override
   final UiMessage name;
 
-  @override
-  void onPressed() {
-    debugPrint('onPressed');
-  }
 }
