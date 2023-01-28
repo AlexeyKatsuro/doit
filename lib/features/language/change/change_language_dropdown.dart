@@ -1,5 +1,4 @@
 import 'package:doit/features/language/change/matchers/locale_matcher.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:localization/localization.dart';
 import 'package:ui_kit/ui_kit.dart';

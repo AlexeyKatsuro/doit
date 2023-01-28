@@ -133,17 +133,47 @@ abstract class AppLocalizations {
   /// **'Retry'**
   String get errorActionRetry;
 
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
   /// No description provided for @homeNewReminder.
   ///
   /// In en, this message translates to:
   /// **'New Reminder'**
   String get homeNewReminder;
 
-  /// No description provided for @logout.
+  /// No description provided for @homeSearchHint.
   ///
   /// In en, this message translates to:
-  /// **'Logout'**
-  String get logout;
+  /// **'Search'**
+  String get homeSearchHint;
+
+  /// No description provided for @homeMyListsHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'My Lists'**
+  String get homeMyListsHeader;
+
+  /// No description provided for @homeAddList.
+  ///
+  /// In en, this message translates to:
+  /// **'Add List'**
+  String get homeAddList;
+
+  /// No description provided for @homeMenuEditLists.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Lists'**
+  String get homeMenuEditLists;
+
+  /// No description provided for @homeMenuTemplates.
+  ///
+  /// In en, this message translates to:
+  /// **'Templates'**
+  String get homeMenuTemplates;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

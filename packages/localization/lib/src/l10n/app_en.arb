@@ -6,6 +6,11 @@
   "languageEn": "English",
   "errorCommon": "Something went wrong",
   "errorActionRetry": "Retry",
+  "logout": "Logout",
   "homeNewReminder": "New Reminder",
-  "logout": "Logout"
+  "homeSearchHint": "Search",
+  "homeMyListsHeader": "My Lists",
+  "homeAddList": "Add List",
+  "homeMenuEditLists": "Edit Lists",
+  "homeMenuTemplates": "Templates"
 }
