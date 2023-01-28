@@ -1,5 +1,4 @@
 import 'package:doit/features/common/index.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:localization/localization.dart';
 import 'package:mobx/mobx.dart';

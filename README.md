@@ -44,7 +44,7 @@ dev_dependencies:
     sdk: flutter
 -  flutter_lints: ^2.0.0
 +  analysis_options:
-+    path: packages/analysis_options
++    path: ../analysis_options
 ```
 
 And at analysis_options.yaml
