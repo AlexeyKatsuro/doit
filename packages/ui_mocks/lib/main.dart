@@ -41,8 +41,7 @@ class RoutesPage extends StatelessWidget {
         title: const Text('Routes'),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: Wrap(
           children: [
             for (final route in routes.keys)
               OutlinedButton(

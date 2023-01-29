@@ -1,14 +1,9 @@
 import 'package:doit/di/dependencies.dart';
-import 'package:doit/features/auth/sign_in/sign_in_page.dart';
-import 'package:doit/features/auth/sign_in/sign_in_view_model.dart';
-import 'package:doit/features/auth/sign_up/sign_up_page.dart';
-import 'package:doit/features/auth/sign_up/sign_up_view_model.dart';
-import 'package:doit/features/home/home_page.dart';
-import 'package:doit/features/home/home_view_model.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:ui/ui.dart';
 
 abstract class RouteNames {
   static const signIn = 'sign-in';
