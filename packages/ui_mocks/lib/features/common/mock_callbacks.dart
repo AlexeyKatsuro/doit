@@ -2,7 +2,6 @@ import 'dart:core';
 
 import 'package:flutter/foundation.dart';
 
-
 abstract class MockCallbacks {
   @override
   dynamic noSuchMethod(Invocation invocation) {

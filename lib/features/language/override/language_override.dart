@@ -26,14 +26,12 @@ class _LocaleOverrideState extends State<LocaleOverride> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (context) {
-        return Localizations.override(
-          context: context,
-          locale: widget.viewModel.overwritten,
-          child: widget.child,
-        );
-      }
-    );
+    return Observer(builder: (context) {
+      return Localizations.override(
+        context: context,
+        locale: widget.viewModel.overwritten,
+        child: widget.child,
+      );
+    });
   }
 }

@@ -131,4 +131,3 @@ class IgnoreDivider extends WidgetDecoration {
   const IgnoreDivider({Key? key, required Widget child, bool isActive = true})
       : super(key: key, child: child, active: isActive);
 }
-

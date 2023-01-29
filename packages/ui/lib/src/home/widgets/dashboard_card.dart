@@ -20,32 +20,30 @@ class DashboardTile extends StatelessWidget {
       child: InkWell(
         onTap: viewModel.onPressed,
         child: Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: 12.0) + const EdgeInsets.only(top: 8, bottom: 4),
-          child: Observer(
-            builder: (context) {
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(viewModel.icon.toMaterialIconData()),
-                        const Gap(8),
-                        Text(viewModel.name.localize(l10n))
-                      ],
-                    ),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0) +
+              const EdgeInsets.only(top: 8, bottom: 4),
+          child: Observer(builder: (context) {
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(viewModel.icon.toMaterialIconData()),
+                      const Gap(8),
+                      Text(viewModel.name.localize(l10n))
+                    ],
                   ),
-                  Text(
-                    '${viewModel.count}',
-                    style: theme.textTheme.headline6,
-                  ),
-                ],
-              );
-            }
-          ),
+                ),
+                Text(
+                  '${viewModel.count}',
+                  style: theme.textTheme.headline6,
+                ),
+              ],
+            );
+          }),
         ),
       ),
     );

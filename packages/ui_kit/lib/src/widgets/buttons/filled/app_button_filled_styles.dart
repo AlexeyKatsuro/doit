@@ -1,5 +1,1 @@
-
-
-abstract class AppButtonFilledStyles {
-
-}
+abstract class AppButtonFilledStyles {}

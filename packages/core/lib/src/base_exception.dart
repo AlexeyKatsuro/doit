@@ -1,4 +1,3 @@
-
 class BaseException implements Exception {
   BaseException({this.message, this.originException, this.stackTrace});
 

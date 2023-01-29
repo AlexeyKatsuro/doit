@@ -1,11 +1,10 @@
 import 'package:doit_ui_mocks/features/common/index.dart';
-import 'package:flutter/foundation.dart';
 import 'package:localization/localization.dart';
 import 'package:ui/ui.dart';
 
-class TextFieldViewModelMock extends TextFieldViewModel with MockCallbacks{
+class TextFieldViewModelMock extends TextFieldViewModel with MockCallbacks {
   const TextFieldViewModelMock({
-   this.value = '',
+    this.value = '',
     this.errorMessage,
     this.hintMessage,
     this.labelMessage,
@@ -21,5 +20,4 @@ class TextFieldViewModelMock extends TextFieldViewModel with MockCallbacks{
 
   @override
   final UiMessage? labelMessage;
-
 }

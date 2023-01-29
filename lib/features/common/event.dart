@@ -1,4 +1,3 @@
-
 class Event<T> {
   Event(this.value);
 

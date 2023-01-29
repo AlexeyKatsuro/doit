@@ -3,7 +3,6 @@ import 'package:ui_kit/src/utils/extensions/index.dart';
 
 import 'sliver_child_builder_separated_delegate.dart';
 
-
 /// Creates grid with intrinsic row which able to aligned with highest widget in this row
 ///
 /// [itemCount] - count of elements to display
@@ -13,7 +12,6 @@ import 'sliver_child_builder_separated_delegate.dart';
 /// [itemBuilder] - takes [IndexedWidgetBuilder] function to draw widget inside grid
 
 class SliverGridIntrinsicRow extends StatelessWidget {
-
   const SliverGridIntrinsicRow({
     Key? key,
     required this.itemCount,

@@ -24,8 +24,7 @@ abstract class AuthStoreBase with Store {
   }
 
   @action
-  Future<void> logout()  {
+  Future<void> logout() {
     return _authRepository.signOut();
   }
-
 }
