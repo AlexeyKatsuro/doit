@@ -1,3 +1,4 @@
+import 'package:doit_ui_mocks/features/home/fixtures.dart';
 import 'package:doit_ui_mocks/features/home/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark(useMaterial3: true),
       initialRoute: '/home',
       routes: {
-        '/home': (_) => HomePage(viewModel: HomeViewModelMock()),
+        ...homePages,
       },
     );
   }

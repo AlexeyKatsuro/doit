@@ -2,6 +2,7 @@ import 'package:mobx/mobx.dart';
 import 'package:localization/localization.dart';
 
 abstract class FormFieldViewModel<T> {
+  const FormFieldViewModel();
   T get value;
 
   UiMessage? get errorMessage;
@@ -11,6 +12,8 @@ abstract class FormFieldViewModel<T> {
 }
 
 abstract class TextFieldViewModel implements FormFieldViewModel<String> {
+  const TextFieldViewModel();
+
   String get text => value;
 
   UiMessage? get labelMessage;
