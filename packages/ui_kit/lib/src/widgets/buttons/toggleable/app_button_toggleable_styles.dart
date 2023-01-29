@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 abstract class AppButtonToggleableStyles {
   static ButtonStyle defaultStyle(BuildContext context) {
     final theme = Theme.of(context);

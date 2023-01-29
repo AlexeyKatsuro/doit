@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:ui';
 
 abstract class LanguageRepository {
-
   FutureOr<void> dispose();
 
   Locale? getOverwrittenLocale();

@@ -1,16 +1,13 @@
-
 import 'package:ui/src/common/index.dart';
 
-
 abstract class SignUpViewModel {
+  TextFieldViewModel get email;
 
-   TextFieldViewModel get email;
+  TextFieldViewModel get password;
 
-   TextFieldViewModel get password;
+  TextFieldViewModel get repeatPassword;
 
-   TextFieldViewModel get repeatPassword;
-
-   bool get isLoading;
+  bool get isLoading;
 
   void onRegisterPressed();
 

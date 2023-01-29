@@ -10,5 +10,5 @@ late final Injector injector;
 @InjectableInit()
 Future<void> initDependencies(Injector parentInjector) {
   injector = parentInjector;
- return  injector.init();
+  return injector.init();
 }

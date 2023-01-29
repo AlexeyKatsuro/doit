@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:localization/localization.dart';
 
-
 import 'package:mobx/mobx.dart';
 
 part 'change_language_view_model.g.dart';
@@ -14,7 +13,6 @@ part 'change_language_view_model.g.dart';
 class ChangeLanguageViewModel = ChangeLanguageViewModelBase with _$ChangeLanguageViewModel;
 
 abstract class ChangeLanguageViewModelBase with Store {
-
   ChangeLanguageViewModelBase(this._languageStore);
 
   final LanguageStore _languageStore;
@@ -34,7 +32,5 @@ abstract class ChangeLanguageViewModelBase with Store {
   }
 
   @computed
-  List<Locale> get options => [systemLocale , ...AppLocalizations.supportedLocales];
-
+  List<Locale> get options => [systemLocale, ...AppLocalizations.supportedLocales];
 }
-

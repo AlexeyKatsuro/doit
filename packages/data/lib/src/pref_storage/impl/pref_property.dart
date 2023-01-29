@@ -3,7 +3,6 @@
 part of 'pref_storage_impl.dart';
 
 class _PrefProperty<T> extends PrefProperty<T> {
-
   _PrefProperty(
     this._storage, {
     required this.key,

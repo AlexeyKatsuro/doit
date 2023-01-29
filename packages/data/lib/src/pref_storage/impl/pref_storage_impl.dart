@@ -21,8 +21,8 @@ class PrefStorageImpl extends PrefStorage {
 
   @override
   @disposeMethod
-  Future<void> dispose(){
-   return _notifier.close();
+  Future<void> dispose() {
+    return _notifier.close();
   }
 
   @override
@@ -37,5 +37,4 @@ class PrefStorageImpl extends PrefStorage {
     defaultValue: null,
     adapter: const LocaleAdapter(),
   );
-
 }

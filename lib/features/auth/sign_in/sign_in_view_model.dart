@@ -12,6 +12,7 @@ part 'sign_in_view_model.g.dart';
 
 @injectable
 class SignInViewModel = SignInViewModelBase with _$SignInViewModel;
+
 abstract class SignInViewModelBase with Store {
   SignInViewModelBase(this._authRepository, this._router);
 

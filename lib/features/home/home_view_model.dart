@@ -1,5 +1,3 @@
-
-
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
@@ -16,7 +14,5 @@ abstract class HomeViewModelBase with Store {
   String get fullName => value;
 
   @action
-  void onPressed() {
-
-  }
+  void onPressed() {}
 }

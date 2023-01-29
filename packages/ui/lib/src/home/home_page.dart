@@ -50,44 +50,38 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             sliver: MultiSliver(
               children: [
-                Observer(
-                  builder: (context) {
-                    return AppTextField.new.fromViewModel(
-                      viewModel.search,
-                      l10n: l10n,
-                      labelText: l10n.homeSearchHint,
-                    );
-                  }
-                ),
+                Observer(builder: (context) {
+                  return AppTextField.new.fromViewModel(
+                    viewModel.search,
+                    l10n: l10n,
+                    labelText: l10n.homeSearchHint,
+                  );
+                }),
                 const Gap(16),
-                Observer(
-                  builder: (context) {
-                    return SliverGridIntrinsicRow(
-                      itemCount: viewModel.dashboard.length,
-                      crossAxisCount: 2,
-                      itemBuilder: (BuildContext context, int index) {
-                        return DashboardTile(
-                          viewModel: viewModel.dashboard[index],
-                        );
-                      },
-                    );
-                  }
-                ),
+                Observer(builder: (context) {
+                  return SliverGridIntrinsicRow(
+                    itemCount: viewModel.dashboard.length,
+                    crossAxisCount: 2,
+                    itemBuilder: (BuildContext context, int index) {
+                      return DashboardTile(
+                        viewModel: viewModel.dashboard[index],
+                      );
+                    },
+                  );
+                }),
                 const Gap(20),
                 Text(l10n.homeMyListsHeader, style: theme.textTheme.headline6),
                 const Gap(8),
                 AppCard(
                   clipBehavior: Clip.antiAlias,
-                  child: Observer(
-                    builder: (context) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          for (final list in viewModel.lists) TaskListTile(viewModel: list),
-                        ],
-                      );
-                    }
-                  ),
+                  child: Observer(builder: (context) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        for (final list in viewModel.lists) TaskListTile(viewModel: list),
+                      ],
+                    );
+                  }),
                 )
               ],
             ),

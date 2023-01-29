@@ -1,4 +1,3 @@
-import 'package:mobx/mobx.dart';
 import 'package:localization/localization.dart';
 
 abstract class FormFieldViewModel<T> {
@@ -6,7 +5,6 @@ abstract class FormFieldViewModel<T> {
   T get value;
 
   UiMessage? get errorMessage;
-
 
   void onChanged(T value);
 }

@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'impl/pref_storage_impl.dart';
 
-
 /// Interface for data to be stored in persistent storage.
 ///
 /// Use [PrefProperty] wrapper over the stored data.

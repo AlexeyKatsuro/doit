@@ -1,4 +1,1 @@
-
-class UserCredential {
-
-}
+class UserCredential {}
