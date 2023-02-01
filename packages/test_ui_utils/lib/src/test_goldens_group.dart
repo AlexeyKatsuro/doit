@@ -8,6 +8,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:meta/meta.dart';
 
+import 'goldens_group_config.dart';
+
 typedef ThemeWrapper = Widget Function(Widget widget);
 typedef ValueBuilder<T> = T Function(BuildContext context);
 
@@ -78,42 +80,46 @@ void testGoldensGroup({
   required String description,
   required String name,
   required Widget Function(BuildContext context) builder,
+  bool overrideDefault = false,
   FutureOr<void> Function()? setUp,
-  bool autoHeight = true,
-  Size? surfaceSize,
-  double? surfaceWidth,
-  double? surfaceHeight,
-  ThemeWrapper? wrapper,
-  ValueBuilder<Color?>? background,
-  ValueBuilder<Color?>? foreground,
-  Alignment? alignment = Alignment.center,
-  Iterable<Brightness> brightnesses = const [Brightness.light],
-  bool debugPaintSizeEnabled = false,
-  CustomPump? customPump,
-  DateTime? dateTime,
+  GoldensGroupConfig? config,
 }) {
-  background ??= defaultBackground;
-  foreground ??= defaultForeground;
-  var size = surfaceSize ?? Device.phone.size;
-  size = Size(surfaceWidth ?? size.width, surfaceHeight ?? size.height);
-  wrapper ??= (child) => materialAppWrapper(child);
+  var effectiveConfig = const GoldensGroupConfigEffective(
+    autoHeight: true,
+    background: defaultBackground,
+    foreground: defaultForeground,
+    brightnesses: [Brightness.light],
+    debugPaintSizeEnabled: false,
+    alignment: Alignment.center,
+    wrapper: materialAppWrapper,
+    surfaceSize: Size(375, 667),
+  ).merge(overrideDefault ? null : GoldensGroupConfig.config).merge(config);
 
-  for (final brightness in brightnesses) {
-    final nameSuffix = brightnesses.length > 1 ? '_${describeEnum(brightness)}' : '';
+  for (final brightness in effectiveConfig.brightnesses) {
+    final nameSuffix =
+        effectiveConfig.brightnesses.length > 1 ? '_${describeEnum(brightness)}' : '';
     testGoldens(description, (WidgetTester tester) async {
-      return withClock(dateTime != null ? Clock.fixed(dateTime) : clock, () async {
+      return withClock(
+          effectiveConfig.dateTime != null ? Clock.fixed(effectiveConfig.dateTime!) : clock,
+          () async {
         await setUp?.call();
         tester.binding.window.platformDispatcher.platformBrightnessTestValue = brightness;
-        rend.debugPaintSizeEnabled = debugPaintSizeEnabled;
+        rend.debugPaintSizeEnabled = effectiveConfig.debugPaintSizeEnabled;
         await tester.pumpWidgetBuilder(
-            applyBackground(Builder(builder: builder), background!, foreground, alignment),
-            wrapper: wrapper,
-            surfaceSize: size);
+          applyBackground(
+            Builder(builder: builder),
+            effectiveConfig.background,
+            effectiveConfig.foreground,
+            effectiveConfig.alignment,
+          ),
+          wrapper: effectiveConfig.wrapper,
+          surfaceSize: effectiveConfig.surfaceSize,
+        );
         await screenMatchesGolden(
           tester,
           '${name.trim()}$nameSuffix',
-          autoHeight: autoHeight,
-          customPump: customPump,
+          autoHeight: effectiveConfig.autoHeight,
+          customPump: effectiveConfig.customPump,
         );
         rend.debugPaintSizeEnabled = false;
       });
