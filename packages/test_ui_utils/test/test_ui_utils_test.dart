@@ -5,7 +5,9 @@ void main() {
   testGoldensGroup(
     description: 'Text appearance test',
     name: 'text_appearance',
-    surfaceHeight: 200,
+    config: const GoldensGroupConfig(
+      surfaceSize: Size.fromHeight(200),
+    ),
     builder: (context) {
       final builder = ScenarioBuilder()
         ..addScenario(

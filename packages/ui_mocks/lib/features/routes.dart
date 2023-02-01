@@ -1,5 +1,3 @@
-
-
 import 'package:doit_ui_mocks/features/auth/sign_in/fixtures.dart';
 import 'package:doit_ui_mocks/features/auth/sign_up/fixtures.dart';
 import 'package:doit_ui_mocks/features/home/fixtures.dart';

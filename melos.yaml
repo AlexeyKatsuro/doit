@@ -50,3 +50,11 @@ scripts:
     description: Run `flutter gen-l10n` in `localization` package
     select-package:
       scope: "localization"
+  test-g:
+    run: melos exec --depends-on="test_ui_utils" -- "flutter test --tags=golden"
+    description: Run `flutter test` in all packages
+
+  test-g-u:
+    run: melos exec --depends-on="test_ui_utils" -- "flutter test --update-goldens --tags=golden"
+    description: Run `flutter test` in all packages
+
