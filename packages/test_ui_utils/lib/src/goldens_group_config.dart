@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 
 import 'test_goldens_group.dart';
