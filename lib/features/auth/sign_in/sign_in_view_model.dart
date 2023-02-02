@@ -2,26 +2,29 @@ import 'package:doit/features/common/error_handling.dart';
 import 'package:doit/features/common/event.dart';
 import 'package:doit/features/common/stores/text_field_view_model.dart';
 import 'package:doit/features/navigation/index.dart';
+import 'package:domain/domain.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:localization/localization.dart';
 import 'package:mobx/mobx.dart';
-import 'package:domain/domain.dart';
+import 'package:ui/ui.dart';
 
 part 'sign_in_view_model.g.dart';
 
-@injectable
-class SignInViewModel = SignInViewModelBase with _$SignInViewModel;
+@Injectable(as: SignInViewModel)
+class SignInViewModelImpl = SignInViewModelBase with _$SignInViewModelImpl;
 
-abstract class SignInViewModelBase with Store {
+abstract class SignInViewModelBase with Store implements SignInViewModel {
   SignInViewModelBase(this._authRepository, this._router);
 
   final AuthRepository _authRepository;
   final GoRouter _router;
 
-  late TextFieldViewModel email = TextFieldViewModel(resetErrorOnChange: true);
+  @override
+  late TextFieldViewModelImpl email = TextFieldViewModelImpl(resetErrorOnChange: true);
 
-  late TextFieldViewModel password = TextFieldViewModel(resetErrorOnChange: true);
+  @override
+  late TextFieldViewModelImpl password = TextFieldViewModelImpl(resetErrorOnChange: true);
 
   @observable
   Event<UiMessage?> errorEvent = Event(null);
@@ -29,6 +32,7 @@ abstract class SignInViewModelBase with Store {
   @observable
   bool _isLoading = false;
 
+  @override
   @computed
   bool get isLoading => _isLoading;
 
@@ -66,12 +70,14 @@ abstract class SignInViewModelBase with Store {
     return isValid;
   }
 
+  @override
   void onLoginPressed() {
     if (_validate()) {
       _login();
     }
   }
 
+  @override
   void onRegisterPressed() {
     _router.pushNamed(RouteNames.signUp);
   }
