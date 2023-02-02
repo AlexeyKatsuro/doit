@@ -20,11 +20,11 @@ abstract class SignUpViewModelBase with Store {
 
   final AuthRepository _authRepository;
 
-  late TextFieldViewModel email = TextFieldViewModel(resetErrorOnChange: true);
+  late TextFieldViewModelImpl email = TextFieldViewModelImpl(resetErrorOnChange: true);
 
-  late TextFieldViewModel password = TextFieldViewModel(resetErrorOnChange: true);
+  late TextFieldViewModelImpl password = TextFieldViewModelImpl(resetErrorOnChange: true);
 
-  late TextFieldViewModel repeatPassword = TextFieldViewModel(resetErrorOnChange: true);
+  late TextFieldViewModelImpl repeatPassword = TextFieldViewModelImpl(resetErrorOnChange: true);
 
   @observable
   Event<UiMessage?> errorEvent = Event(null);
