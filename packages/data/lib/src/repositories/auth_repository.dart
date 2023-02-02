@@ -25,8 +25,10 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<UserCredential> createUserWithEmailAndPassword(
-      {required String email, required String password}) async {
+  Future<UserCredential> createUserWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
     try {
       final credential = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,

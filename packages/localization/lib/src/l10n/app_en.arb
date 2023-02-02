@@ -12,5 +12,6 @@
   "homeMyListsHeader": "My Lists",
   "homeAddList": "Add List",
   "homeMenuEditLists": "Edit Lists",
-  "homeMenuTemplates": "Templates"
+  "homeMenuTemplates": "Templates",
+  "homeMenuLogout": "Logout"
 }

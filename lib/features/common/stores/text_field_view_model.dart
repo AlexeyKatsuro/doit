@@ -14,7 +14,7 @@ abstract class TextFieldViewModelBase with Store implements TextFieldViewModel {
     ValueSetter<String>? onSubmitted,
     ValueChanged<String>? onChanged,
   })  : value = text ?? '',
-        _resetErrorOnChange = resetErrorOnChange ?? false,
+        _resetErrorOnChange = resetErrorOnChange ?? true,
         _onSubmitted = onSubmitted,
         _onChanged = onChanged;
 
