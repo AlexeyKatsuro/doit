@@ -21,10 +21,10 @@ abstract class SignInViewModelBase with Store implements SignInViewModel {
   final GoRouter _router;
 
   @override
-  late TextFieldViewModelImpl email = TextFieldViewModelImpl(resetErrorOnChange: true);
+  late TextFieldViewModelImpl email = TextFieldViewModelImpl();
 
   @override
-  late TextFieldViewModelImpl password = TextFieldViewModelImpl(resetErrorOnChange: true);
+  late TextFieldViewModelImpl password = TextFieldViewModelImpl();
 
   @observable
   Event<UiMessage?> errorEvent = Event(null);

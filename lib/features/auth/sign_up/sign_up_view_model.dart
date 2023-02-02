@@ -7,37 +7,39 @@ import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:localization/localization.dart';
 import 'package:mobx/mobx.dart';
+import 'package:ui/ui.dart';
 
 part 'sign_up_view_model.g.dart';
 
-@injectable
-class SignUpViewModel = SignUpViewModelBase with _$SignUpViewModel;
+@Injectable(as: SignUpViewModel)
+class SignUpViewModelImpl = SignUpViewModelBase with _$SignUpViewModelImpl;
 
-abstract class SignUpViewModelBase with Store {
+abstract class SignUpViewModelBase with Store implements SignUpViewModel {
   SignUpViewModelBase(this._authRepository, this._router);
 
   final GoRouter _router;
 
   final AuthRepository _authRepository;
 
-  late TextFieldViewModelImpl email = TextFieldViewModelImpl(resetErrorOnChange: true);
+  @override
+  late TextFieldViewModelImpl email = TextFieldViewModelImpl();
 
-  late TextFieldViewModelImpl password = TextFieldViewModelImpl(resetErrorOnChange: true);
+  @override
+  late TextFieldViewModelImpl password = TextFieldViewModelImpl();
 
-  late TextFieldViewModelImpl repeatPassword = TextFieldViewModelImpl(resetErrorOnChange: true);
+  @override
+  late TextFieldViewModelImpl repeatPassword = TextFieldViewModelImpl();
 
   @observable
   Event<UiMessage?> errorEvent = Event(null);
 
+  @override
   @observable
-  bool _isLoading = false;
-
-  @computed
-  bool get isLoading => _isLoading;
+  late bool isLoading = false;
 
   @action
   Future<void> _register() async {
-    _isLoading = true;
+    isLoading = true;
     try {
       await _authRepository.createUserWithEmailAndPassword(
         email: email.text.trim(),
@@ -52,9 +54,10 @@ abstract class SignUpViewModelBase with Store {
     } catch (error) {
       errorEvent = Event(error.toUiMessage());
     }
-    _isLoading = false;
+    isLoading = false;
   }
 
+  // TODO l10n
   @action
   bool _validate() {
     var isValid = true;
@@ -73,12 +76,14 @@ abstract class SignUpViewModelBase with Store {
     return isValid;
   }
 
+  @override
   void onRegisterPressed() {
     if (_validate()) {
       _register();
     }
   }
 
+  @override
   void onLoginPressed() {
     _router.goNamed(RouteNames.signIn);
   }

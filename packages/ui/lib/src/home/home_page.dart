@@ -38,6 +38,13 @@ class HomePage extends StatelessWidget {
                       icon: const Icon(Icons.copy_rounded),
                     ),
                   ),
+                  PopupMenuItem<void>(
+                    onTap: viewModel.onLogoutPressed,
+                    child: MenuTile(
+                      label: Text(l10n.homeMenuLogout),
+                      icon: const Icon(Icons.logout_rounded),
+                    ),
+                  ),
                 ];
               },
             ),

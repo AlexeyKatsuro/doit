@@ -174,6 +174,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Templates'**
   String get homeMenuTemplates;
+
+  /// No description provided for @homeMenuLogout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get homeMenuLogout;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

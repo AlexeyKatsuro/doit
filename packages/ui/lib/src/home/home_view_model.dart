@@ -10,6 +10,8 @@ abstract class HomeViewModel {
 
   List<TaskListTileViewModel> get lists;
 
+  bool get isEditMode;
+
   void onEditListsPressed();
 
   void onTemplatesPressed();
@@ -24,7 +26,7 @@ abstract class HomeViewModel {
 
   void onAddGroupPressed();
 
-  bool get isEditMode;
+  void onLogoutPressed();
 }
 
 abstract class DashboardTileViewModel {
