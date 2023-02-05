@@ -14,14 +14,13 @@ class TaskListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Observer(builder: (context) {
-      return ListTile(
+      return AppTile(
         leading: Icon(viewModel.icon.toMaterialIconData()),
         title: Text(viewModel.name.localize(l10n)),
         dense: true,
         onTap: viewModel.onPressed,
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [Text('${viewModel.count}'), const Icon(Icons.arrow_forward_ios_rounded)],
+        trailing: NavTrailing(
+          label: Text('${viewModel.count}'),
         ),
       );
     });
