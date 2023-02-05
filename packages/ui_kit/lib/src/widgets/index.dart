@@ -4,3 +4,4 @@ export 'loaders/index.dart';
 export 'menu/index.dart';
 export 'slivers/index.dart';
 export 'text_fields/index.dart';
+export 'tiles/index.dart';

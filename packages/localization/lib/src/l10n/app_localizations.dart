@@ -180,6 +180,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Logout'**
   String get homeMenuLogout;
+
+  /// No description provided for @newReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New Reminder'**
+  String get newReminderTitle;
+
+  /// No description provided for @newReminderAddAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get newReminderAddAction;
+
+  /// No description provided for @newReminderTitleInputHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get newReminderTitleInputHint;
+
+  /// No description provided for @newReminderNotesInputHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get newReminderNotesInputHint;
+
+  /// No description provided for @newReminderDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get newReminderDetails;
+
+  /// No description provided for @newReminderList.
+  ///
+  /// In en, this message translates to:
+  /// **'List'**
+  String get newReminderList;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

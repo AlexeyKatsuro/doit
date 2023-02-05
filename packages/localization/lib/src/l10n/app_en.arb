@@ -13,5 +13,11 @@
   "homeAddList": "Add List",
   "homeMenuEditLists": "Edit Lists",
   "homeMenuTemplates": "Templates",
-  "homeMenuLogout": "Logout"
+  "homeMenuLogout": "Logout",
+  "newReminderTitle": "New Reminder",
+  "newReminderAddAction": "Add",
+  "newReminderTitleInputHint": "Title",
+  "newReminderNotesInputHint": "Notes",
+  "newReminderDetails": "Details",
+  "newReminderList": "List"
 }
