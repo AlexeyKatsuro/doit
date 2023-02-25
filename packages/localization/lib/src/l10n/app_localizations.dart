@@ -216,6 +216,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'List'**
   String get newReminderList;
+
+  /// No description provided for @allTaskListsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get allTaskListsTitle;
+
+  /// No description provided for @taskNoteHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Note'**
+  String get taskNoteHint;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

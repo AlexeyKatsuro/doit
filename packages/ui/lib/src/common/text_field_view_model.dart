@@ -2,6 +2,7 @@ import 'package:localization/localization.dart';
 
 abstract class FormFieldViewModel<T> {
   const FormFieldViewModel();
+
   T get value;
 
   UiMessage? get errorMessage;
@@ -13,6 +14,10 @@ abstract class TextFieldViewModel implements FormFieldViewModel<String> {
   const TextFieldViewModel();
 
   String get text => value;
+
+  bool get isEmpty => value.isEmpty;
+
+  bool get isNotEmpty => !isEmpty;
 
   UiMessage? get labelMessage;
 

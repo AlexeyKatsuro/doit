@@ -39,7 +39,7 @@ class DashboardTile extends StatelessWidget {
                 ),
                 Text(
                   '${viewModel.count}',
-                  style: theme.textTheme.headline6,
+                  style: theme.textTheme.titleLarge,
                 ),
               ],
             );

@@ -77,7 +77,7 @@ class HomePage extends StatelessWidget {
                   );
                 }),
                 const Gap(20),
-                Text(l10n.homeMyListsHeader, style: theme.textTheme.headline6),
+                Text(l10n.homeMyListsHeader, style: theme.textTheme.titleLarge),
                 const Gap(8),
                 AppCard(
                   clipBehavior: Clip.antiAlias,

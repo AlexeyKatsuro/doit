@@ -19,5 +19,7 @@
   "newReminderTitleInputHint": "Title",
   "newReminderNotesInputHint": "Notes",
   "newReminderDetails": "Details",
-  "newReminderList": "List"
+  "newReminderList": "List",
+  "allTaskListsTitle": "All",
+  "taskNoteHint": "Add Note"
 }
