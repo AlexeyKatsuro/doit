@@ -1,8 +1,8 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:ui' as ui;
-
 import 'package:ui_kit/src/utils/index.dart';
 
 /// Custom wrapper over material textFiled for future extension.
@@ -23,7 +23,7 @@ class AppTextField extends StatefulWidget {
     this.textAlignVertical,
     this.textDirection,
     bool? readOnly,
-    this.toolbarOptions,
+    this.contextMenuBuilder,
     this.showCursor,
     bool? autofocus,
     String? obscuringCharacter,
@@ -107,7 +107,7 @@ class AppTextField extends StatefulWidget {
   final int? minLines;
   final bool expands;
   final bool readOnly;
-  final ToolbarOptions? toolbarOptions;
+  final EditableTextContextMenuBuilder? contextMenuBuilder;
   final bool? showCursor;
   final int? maxLength;
   final MaxLengthEnforcement? maxLengthEnforcement;
@@ -183,7 +183,7 @@ class _AppTextFieldState extends State<AppTextField> {
         minLines: widget.minLines,
         expands: widget.expands,
         readOnly: widget.readOnly,
-        toolbarOptions: widget.toolbarOptions,
+        contextMenuBuilder: widget.contextMenuBuilder,
         showCursor: widget.showCursor,
         maxLength: widget.maxLength,
         maxLengthEnforcement: widget.maxLengthEnforcement,

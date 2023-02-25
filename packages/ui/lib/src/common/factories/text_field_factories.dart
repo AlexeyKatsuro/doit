@@ -1,7 +1,7 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/services.dart';
 import 'dart:ui' as ui;
 
+import 'package:flutter/gestures.dart';
+import 'package:flutter/services.dart';
 import 'package:localization/localization.dart' hide TextDirection;
 import 'package:ui_kit/ui_kit.dart';
 
@@ -10,8 +10,7 @@ import '../text_field_view_model.dart';
 typedef AppTextFieldFactory = AppTextField Function({required String? text});
 
 extension TextFieldFactoriesExt on AppTextFieldFactory {
-  AppTextField fromViewModel(
-    TextFieldViewModel viewModel, {
+  AppTextField fromViewModel(TextFieldViewModel viewModel, {
     required AppLocalizations l10n,
     String? labelText,
     String? hintText,
@@ -37,7 +36,7 @@ extension TextFieldFactoriesExt on AppTextFieldFactory {
     int? minLines,
     bool? expands,
     bool? readOnly,
-    ToolbarOptions? toolbarOptions,
+    EditableTextContextMenuBuilder? contextMenuBuilder,
     bool? showCursor,
     int? maxLength,
     MaxLengthEnforcement? maxLengthEnforcement,
@@ -97,7 +96,7 @@ extension TextFieldFactoriesExt on AppTextFieldFactory {
       minLines: minLines,
       expands: expands,
       readOnly: readOnly,
-      toolbarOptions: toolbarOptions,
+      contextMenuBuilder: contextMenuBuilder,
       showCursor: showCursor,
       maxLength: maxLength,
       maxLengthEnforcement: maxLengthEnforcement,

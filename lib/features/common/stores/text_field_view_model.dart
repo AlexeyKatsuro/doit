@@ -58,4 +58,12 @@ abstract class TextFieldViewModelBase with Store implements TextFieldViewModel {
   void onSubmitted(String text) {
     _onSubmitted?.call(text);
   }
+
+  @override
+  @computed
+  bool get isEmpty => value.isEmpty;
+
+  @override
+  @computed
+  bool get isNotEmpty => !isEmpty;
 }

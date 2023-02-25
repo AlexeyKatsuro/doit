@@ -19,7 +19,7 @@ class AppPhoneField extends AppTextField {
     super.textAlignVertical,
     super.textDirection,
     super.readOnly,
-    super.toolbarOptions,
+    super.contextMenuBuilder,
     super.showCursor,
     super.autofocus,
     super.obscuringCharacter,

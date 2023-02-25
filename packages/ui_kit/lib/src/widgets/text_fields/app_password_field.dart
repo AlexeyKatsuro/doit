@@ -1,8 +1,9 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ui_kit/src/utils/merge/index.dart';
-import 'dart:ui' as ui;
 
 import 'app_text_field.dart';
 
@@ -22,7 +23,7 @@ class AppPasswordField extends StatefulWidget {
     this.textAlignVertical,
     this.textDirection,
     this.readOnly = false,
-    this.toolbarOptions,
+    this.contextMenuBuilder,
     this.showCursor,
     this.autofocus = false,
     this.obscuringCharacter = '•',
@@ -87,7 +88,7 @@ class AppPasswordField extends StatefulWidget {
   final int? minLines;
   final bool expands;
   final bool readOnly;
-  final ToolbarOptions? toolbarOptions;
+  final EditableTextContextMenuBuilder? contextMenuBuilder;
   final bool? showCursor;
   final int? maxLength;
   final MaxLengthEnforcement? maxLengthEnforcement;
@@ -161,7 +162,7 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
       minLines: widget.minLines,
       expands: widget.expands,
       readOnly: widget.readOnly,
-      toolbarOptions: widget.toolbarOptions,
+      contextMenuBuilder: widget.contextMenuBuilder,
       showCursor: widget.showCursor,
       maxLength: widget.maxLength,
       maxLengthEnforcement: widget.maxLengthEnforcement,
