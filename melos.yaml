@@ -37,7 +37,7 @@ scripts:
     description: Run `flutter analyze` in all packages
 
   format:
-    exec: flutter format --line-length=100 ./
+    exec: dart format --line-length=100 ./
     description: Run `flutter format` in all packages
 
   test:
