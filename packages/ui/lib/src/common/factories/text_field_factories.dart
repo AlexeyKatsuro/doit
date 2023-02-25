@@ -10,7 +10,8 @@ import '../text_field_view_model.dart';
 typedef AppTextFieldFactory = AppTextField Function({required String? text});
 
 extension TextFieldFactoriesExt on AppTextFieldFactory {
-  AppTextField fromViewModel(TextFieldViewModel viewModel, {
+  AppTextField fromViewModel(
+    TextFieldViewModel viewModel, {
     required AppLocalizations l10n,
     String? labelText,
     String? hintText,
