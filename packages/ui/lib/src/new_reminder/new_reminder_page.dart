@@ -1,3 +1,4 @@
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:localization/localization.dart';
 import 'package:ui/ui.dart';
 import 'package:ui_kit/ui_kit.dart';
@@ -15,27 +16,33 @@ class NewReminderPage extends StatelessWidget {
         title: Text(l10n.newReminderTitle),
         actions: [
           Center(
-            child: AppButtonIcon(
-              enable: viewModel.isAddEnabled,
-              onPressed: viewModel.onAddPressed,
-              icon: const Icon(Icons.add_rounded),
-            ),
+            child: Observer(builder: (context) {
+              return AppButtonIcon(
+                enable: viewModel.isAddEnabled,
+                onPressed: viewModel.onAddPressed,
+                icon: const Icon(Icons.add_rounded),
+              );
+            }),
           ),
         ],
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         children: [
-          AppTextField.new.fromViewModel(
-            viewModel.title,
-            l10n: l10n,
-            labelText: l10n.newReminderTitleInputHint,
-          ),
-          AppTextField.new.fromViewModel(
-            viewModel.title,
-            l10n: l10n,
-            labelText: l10n.newReminderNotesInputHint,
-          ),
+          Observer(builder: (context) {
+            return AppTextField.new.fromViewModel(
+              viewModel.title,
+              l10n: l10n,
+              labelText: l10n.newReminderTitleInputHint,
+            );
+          }),
+          Observer(builder: (context) {
+            return AppTextField.new.fromViewModel(
+              viewModel.subTitle,
+              l10n: l10n,
+              labelText: l10n.newReminderNotesInputHint,
+            );
+          }),
           AppCard(
             child: AppTile(
               onTap: viewModel.onDetailsPressed,
@@ -47,7 +54,13 @@ class NewReminderPage extends StatelessWidget {
             child: AppTile(
               onTap: viewModel.onListPressed,
               title: Text(l10n.newReminderList),
-              trailing: NavTrailing(label: Text(viewModel.selectedListName)),
+              trailing: NavTrailing(
+                label: Observer(
+                  builder: (context) {
+                    return Text(viewModel.selectedListName);
+                  },
+                ),
+              ),
             ),
           ),
         ].divide(

@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:core/core.dart';
 import 'package:data/src/dto/index.dart';
 import 'package:domain/domain.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
@@ -7,9 +9,10 @@ import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
-  AuthRepositoryImpl(this._firebaseAuth);
+  AuthRepositoryImpl(this._firebaseAuth, this._firebaseFirestore);
 
   final fb.FirebaseAuth _firebaseAuth;
+  final FirebaseFirestore _firebaseFirestore;
 
   @override
   User? getCurrentUser() {
@@ -34,9 +37,21 @@ class AuthRepositoryImpl extends AuthRepository {
         email: email,
         password: password,
       );
+      await _firebaseFirestore.doc('/users/${credential.user!.uid}').set({
+        'email': email,
+      });
+      await _firebaseFirestore
+          .collection('users')
+          .doc(credential.user?.uid.requireNotNull('user'))
+          .collection('reminder_list')
+          .doc(RemindersRepository.defaultListId)
+          .set({'name': 'Reminders'});
+
       return UserCredentialDto(credential: credential);
     } on fb.FirebaseAuthException catch (e, stackTrace) {
-      if (e.code == 'weak-password') {
+      if (e.code == 'invalid-email') {
+        throw Error.throwWithStackTrace(InvalidEmailException(), stackTrace);
+      } else if (e.code == 'weak-password') {
         throw Error.throwWithStackTrace(WeakPasswordException(), stackTrace);
       } else if (e.code == 'email-already-in-use') {
         throw Error.throwWithStackTrace(EmailAlreadyInUseException(), stackTrace);

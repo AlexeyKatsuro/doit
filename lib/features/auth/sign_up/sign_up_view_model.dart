@@ -48,6 +48,9 @@ abstract class SignUpViewModelBase with Store implements SignUpViewModel {
     } on EmailAlreadyInUseException catch (error) {
       // TODO: l10n
       email.errorMessage = UiMessage.text(error.message);
+    } on InvalidEmailException catch (error) {
+      // TODO: l10n
+      email.errorMessage = UiMessage.text(error.message);
     } on WeakPasswordException catch (error) {
       // TODO: l10n
       password.errorMessage = UiMessage.text(error.message);

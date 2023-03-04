@@ -9,6 +9,7 @@ abstract class RouteNames {
   static const signIn = 'sign-in';
   static const signUp = 'sign-up';
   static const home = 'home';
+  static const newReminder = 'new-reminder';
 }
 
 GoRouter routerBuilder(BuildContext context) => GoRouter(
@@ -59,6 +60,16 @@ GoRouter routerBuilder(BuildContext context) => GoRouter(
             return Provider<HomeViewModel>(
               create: (_) => injector(),
               builder: (context, _) => HomePage(viewModel: Provider.of(context)),
+            );
+          },
+        ),
+        GoRoute(
+          path: '/${RouteNames.newReminder}',
+          name: RouteNames.newReminder,
+          builder: (context, state) {
+            return Provider<NewReminderViewModel>(
+              create: (_) => injector(),
+              builder: (context, _) => NewReminderPage(viewModel: Provider.of(context)),
             );
           },
         ),

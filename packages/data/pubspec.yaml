@@ -10,12 +10,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  core:
+    path: ../core
   domain:
     path: ../domain
 
   # Firebase
   firebase_core: ^2.4.0
   firebase_auth: ^4.2.3
+  cloud_firestore: ^4.4.3
 
   injectable: ^2.1.0
   intl: ^0.17.0

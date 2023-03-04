@@ -34,6 +34,13 @@ class EmailAlreadyInUseException extends BaseException {
   final String message;
 }
 
+class InvalidEmailException extends BaseException {
+  InvalidEmailException() : message = 'The email address is badly formatted.';
+
+  @override
+  final String message;
+}
+
 class UserNotFoundException extends BaseException {
   UserNotFoundException() : message = 'No user found for that email.';
 
