@@ -1,5 +1,7 @@
 import 'package:doit/features/common/stores/text_field_view_model.dart';
+import 'package:doit/features/navigation/router.dart';
 import 'package:domain/domain.dart';
+import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 import 'package:ui/ui.dart';
@@ -10,9 +12,15 @@ part 'home_view_model.g.dart';
 class HomeViewModelImpl = HomeViewModelBase with _$HomeViewModelImpl;
 
 abstract class HomeViewModelBase with Store implements HomeViewModel {
-  HomeViewModelBase(this._repository);
+  HomeViewModelBase(
+    this._authRepository,
+    this._router,
+    this._remindersRepository,
+  );
 
-  final AuthRepository _repository;
+  final AuthRepository _authRepository;
+  final RemindersRepository _remindersRepository;
+  final GoRouter _router;
 
   @override
   @observable
@@ -30,9 +38,15 @@ abstract class HomeViewModelBase with Store implements HomeViewModel {
   late TextFieldViewModel search = TextFieldViewModelImpl();
 
   @action
+  Future<void> _onInit() async {
+    final count = await _remindersRepository.allReminderCount();
+    lists = [];
+  }
+
+  @action
   Future<void> _logout() async {
     try {
-      await _repository.signOut();
+      await _authRepository.signOut();
     } catch (error) {
       // TODO Error
     }
@@ -51,7 +65,7 @@ abstract class HomeViewModelBase with Store implements HomeViewModel {
 
   @override
   void onAddReminderPressed() {
-    // TODO: implement onAddReminderPressed
+    _router.pushNamed(RouteNames.newReminder);
   }
 
   @override
