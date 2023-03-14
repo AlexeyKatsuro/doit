@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:core/core.dart';
+import 'package:doit/common/view_model.dart';
 import 'package:doit/features/common/index.dart';
 import 'package:domain/domain.dart';
 import 'package:go_router/go_router.dart';
@@ -16,7 +18,7 @@ part 'new_reminder_view_model.g.dart';
 @Injectable(as: NewReminderViewModel)
 class NewReminderViewModelImpl = NewReminderViewModelBase with _$NewReminderViewModelImpl;
 
-abstract class NewReminderViewModelBase with Store implements NewReminderViewModel {
+abstract class NewReminderViewModelBase extends ViewModel implements NewReminderViewModel {
   NewReminderViewModelBase(this._remindersRepository, this._router);
 
   final RemindersRepository _remindersRepository;
@@ -33,20 +35,41 @@ abstract class NewReminderViewModelBase with Store implements NewReminderViewMod
   @observable
   TextFieldViewModel subTitle = TextFieldViewModelImpl();
 
-  @override
-  @observable
-  String selectedListName = 'Reminders';
+  Async<ReminderList> selectedList = const AsyncLoading();
 
   @override
   @computed
-  bool get isAddEnabled => title.text.trim().isNotEmpty;
+  Async<String> get selectedListName => selectedList.map((data) => data.name);
+
+  @override
+  @computed
+  bool get isAddEnabled =>
+      title.text
+          .trim()
+          .isNotEmpty;
+
+
+  @override
+  @action
+  FutureOr<void> init() async {
+    try {
+    final
+    s
+    _remindersRepository
+    .getDefaultReminderList();
+    } catch (error, stackTrace) {
+    log('getDefaultReminderList fail',error: error, stackTrace: stackTrace);
+    }
+  }
 
   @action
   Future<void> _addReminder() async {
     try {
       await _remindersRepository.addReminder(
         title: title.text.trim(),
-        description: subTitle.text.trim().nullIfEmpty,
+        description: subTitle.text
+            .trim()
+            .nullIfEmpty,
       );
       _router.goNamed(RouteNames.home);
     } catch (error, stackTrace) {

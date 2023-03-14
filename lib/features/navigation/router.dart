@@ -1,4 +1,5 @@
 import 'package:doit/di/dependencies.dart';
+import 'package:doit/features/new_reminder/new_reminder_view_model.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -80,9 +81,12 @@ GoRouter routerBuilder(BuildContext context) => GoRouter(
           path: '/${RouteNames.newReminder}',
           name: RouteNames.newReminder,
           builder: (context, state) {
-            return Provider<NewReminderViewModel>(
-              create: (_) => injector(),
-              builder: (context, _) => NewReminderPage(viewModel: Provider.of(context)),
+            return Provider<NewReminderViewModelImpl>(
+              create: (_) => injector()..init(),
+              dispose: (context, vm) => vm.dispose(),
+              builder: (context, _) => NewReminderPage(
+                viewModel: Provider.of<NewReminderViewModelImpl>(context),
+              ),
             );
           },
         ),

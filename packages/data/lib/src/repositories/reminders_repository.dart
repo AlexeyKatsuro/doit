@@ -1,26 +1,23 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/core.dart';
 import 'package:domain/domain.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton(as: RemindersRepository)
-class RemindersRepositoryImpl extends RemindersRepository {
-  RemindersRepositoryImpl(this._firestore, this._fireauth);
+import 'firebase_repository.dart';
 
-  final FirebaseFirestore _firestore;
-  final FirebaseAuth _fireauth;
+@LazySingleton(as: RemindersRepository)
+class RemindersRepositoryImpl extends FirebaseRepository with RemindersRepository {
+  RemindersRepositoryImpl(super.firebaseFirestore, super.firebaseAuth);
 
   @override
   Future<int> allReminderCount() async {
-    return (await _firestore.collection('reminders').count().get()).count;
+    return (await firebaseFirestore.collection('reminders').count().get()).count;
   }
 
   @override
   Future<void> addReminder({required String title, String? description, String? listId}) async {
-    await _firestore
+    await firebaseFirestore
         .collection('users')
-        .doc(_fireauth.currentUser?.uid.requireNotNull('user'))
+        .doc(userId)
         .collection('reminder_list')
         .doc(listId ?? RemindersRepository.defaultListId)
         .collection('reminders')
@@ -28,5 +25,27 @@ class RemindersRepositoryImpl extends RemindersRepository {
       'title': title,
       'description': description,
     });
+  }
+
+  @override
+  Future<ReminderList> getDefaultReminderList() {
+    return firebaseFirestore
+        .collection('users')
+        .doc(userId)
+        .collection('reminder_list')
+        .doc(RemindersRepository.defaultListId)
+        .withConverter(
+          fromFirestore: (snapshot, options) {
+            final data = snapshot.data().requireNotNull('data');
+            final name = (data['name'] as String?).requireNotNull('name');
+            return ReminderList(
+              id: snapshot.id,
+              name: name,
+            );
+          },
+          toFirestore: (value, options) => throw UnimplementedError(),
+        )
+        .get()
+        .then((value) => value.data().requireNotNull('data'));
   }
 }

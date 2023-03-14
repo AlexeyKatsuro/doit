@@ -1,11 +1,13 @@
 import 'package:ui/src/common/index.dart';
 
+import 'widgets/selected_list_view_model.dart';
+
 abstract class NewReminderViewModel {
   TextFieldViewModel get title;
 
   TextFieldViewModel get subTitle;
 
-  String get selectedListName;
+  SelectedListViewModel get selectedListViewModel;
 
   bool get isAddEnabled;
 

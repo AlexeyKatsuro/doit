@@ -1,3 +1,4 @@
+import 'package:doit/common/view_model.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
@@ -7,7 +8,7 @@ part 'auth_store.g.dart';
 @lazySingleton
 class AuthStore = AuthStoreBase with _$AuthStore;
 
-abstract class AuthStoreBase with Store {
+abstract class AuthStoreBase extends ViewModel {
   AuthStoreBase(this._authRepository);
 
   final AuthRepository _authRepository;

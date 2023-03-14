@@ -1,3 +1,4 @@
+import 'package:doit/common/view_model.dart';
 import 'package:doit/features/common/error_handling.dart';
 import 'package:doit/features/common/event.dart';
 import 'package:doit/features/common/stores/text_field_view_model.dart';
@@ -14,7 +15,7 @@ part 'sign_in_view_model.g.dart';
 @Injectable(as: SignInViewModel)
 class SignInViewModelImpl = SignInViewModelBase with _$SignInViewModelImpl;
 
-abstract class SignInViewModelBase with Store implements SignInViewModel {
+abstract class SignInViewModelBase extends ViewModel implements SignInViewModel {
   SignInViewModelBase(this._authRepository, this._router);
 
   final AuthRepository _authRepository;

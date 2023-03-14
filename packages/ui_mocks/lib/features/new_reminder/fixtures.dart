@@ -4,7 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:ui/ui.dart';
 
 final newReminderPages = <String, WidgetBuilder>{
-  '/new-reminder/initial': (_) => const NewReminderPage(viewModel: NewReminderViewModelMock()),
+  '/new-reminder/initial': (_) => const NewReminderPage(
+        viewModel: NewReminderViewModelMock(),
+      ),
+  '/new-reminder/error': (_) => const NewReminderPage(
+        viewModel: NewReminderViewModelMock(
+          selectedListName: AsyncError('Something went wrong'),
+        ),
+      ),
   '/new-reminder/filled': (_) => const NewReminderPage(
         viewModel: NewReminderViewModelMock(
           title: TextFieldViewModelMock(value: 'New first task'),
@@ -12,6 +19,7 @@ final newReminderPages = <String, WidgetBuilder>{
             value: 'Finish the home screen and generate the golden tests for it',
           ),
           isAddEnabled: true,
+          selectedListName: AsyncResult('Reminders'),
         ),
       ),
 };
