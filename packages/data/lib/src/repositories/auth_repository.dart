@@ -17,13 +17,28 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   User? getCurrentUser() {
     final user = _firebaseAuth.currentUser;
-    return user == null ? null : User();
+    return user == null
+        ? null
+        : User(
+            isVerified: user.emailVerified,
+            email: user.email.requireNotNull('email'),
+          );
+  }
+
+  @override
+  Future<void> reload() {
+    return _firebaseAuth.currentUser?.reload() ?? Future.value();
   }
 
   @override
   Stream<User?> observeSignIn() {
-    return _firebaseAuth.authStateChanges().map((fb.User? user) {
-      return user == null ? null : User();
+    return _firebaseAuth.userChanges().map((fb.User? user) {
+      return user == null
+          ? null
+          : User(
+              isVerified: user.emailVerified,
+              email: user.email.requireNotNull('email'),
+            );
     });
   }
 
@@ -37,7 +52,9 @@ class AuthRepositoryImpl extends AuthRepository {
         email: email,
         password: password,
       );
-      await _firebaseFirestore.doc('/users/${credential.user!.uid}').set({
+      final user = credential.user.requireNotNull('user');
+      await user.sendEmailVerification();
+      await _firebaseFirestore.doc('/users/${user.uid}').set({
         'email': email,
       });
       await _firebaseFirestore
