@@ -24,8 +24,8 @@ scripts:
 
   gen-code:
     exec: flutter pub run build_runner build --delete-conflicting-outputs
-    select-package:
-      depends-on: build_runner
+    packageFilters:
+      dependsOn: build_runner
 
   gen-code:all:
     run: melos run gen-code --no-select
@@ -48,7 +48,7 @@ scripts:
   gen-l10n:
     exec: flutter gen-l10n && flutter format --line-length=100 ./
     description: Run `flutter gen-l10n` in `localization` package
-    select-package:
+    packageFilters:
       scope: "localization"
   test-g:
     run: melos exec --depends-on="test_ui_utils" -- "flutter test --tags=golden"

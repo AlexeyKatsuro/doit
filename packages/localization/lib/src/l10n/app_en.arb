@@ -21,5 +21,16 @@
   "newReminderDetails": "Details",
   "newReminderList": "List",
   "allTaskListsTitle": "All",
-  "taskNoteHint": "Add Note"
+  "taskNoteHint": "Add Note",
+  "emailVerificationTitle": "Email verification",
+  "emailVerificationHint": "Please verify your email using the link sent to {email}",
+  "@emailVerificationHint": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "emailVerificationCheck": "Verify",
+  "emailVerificationCancel": "Cancel"
 }

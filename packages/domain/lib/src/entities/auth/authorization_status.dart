@@ -1,5 +1,6 @@
 enum AuthorizationStatus {
   processing,
+  requireVerification,
   authorized,
   unauthorized,
 }

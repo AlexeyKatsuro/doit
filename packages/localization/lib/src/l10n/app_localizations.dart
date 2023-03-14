@@ -228,6 +228,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add Note'**
   String get taskNoteHint;
+
+  /// No description provided for @emailVerificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Email verification'**
+  String get emailVerificationTitle;
+
+  /// No description provided for @emailVerificationHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Please verify your email using the link sent to {email}'**
+  String emailVerificationHint(String email);
+
+  /// No description provided for @emailVerificationCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get emailVerificationCheck;
+
+  /// No description provided for @emailVerificationCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get emailVerificationCancel;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

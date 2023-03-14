@@ -8,6 +8,7 @@ import 'package:ui/ui.dart';
 abstract class RouteNames {
   static const signIn = 'sign-in';
   static const signUp = 'sign-up';
+  static const emailVerification = 'email-verification';
   static const home = 'home';
   static const newReminder = 'new-reminder';
 }
@@ -25,6 +26,8 @@ GoRouter routerBuilder(BuildContext context) => GoRouter(
                 return '/home';
               case AuthorizationStatus.unauthorized:
                 return '/auth/sign-in';
+              case AuthorizationStatus.requireVerification:
+                return '/auth/email-verification';
             }
           },
           builder: (context, state) {
@@ -50,6 +53,16 @@ GoRouter routerBuilder(BuildContext context) => GoRouter(
             return Provider<SignUpViewModel>(
               create: (_) => injector(),
               builder: (context, _) => SignUpPage(viewModel: Provider.of(context)),
+            );
+          },
+        ),
+        GoRoute(
+          name: RouteNames.emailVerification,
+          path: '/auth/email-verification',
+          builder: (context, state) {
+            return Provider<EmailVerificationViewModel>(
+              create: (_) => injector(),
+              builder: (context, _) => EmailVerificationPage(viewModel: Provider.of(context)),
             );
           },
         ),
@@ -85,6 +98,9 @@ GoRouter routerBuilder(BuildContext context) => GoRouter(
           case AuthorizationStatus.unauthorized:
             if (state.location.startsWith('/auth')) return null;
             return '/auth/sign-in';
+          case AuthorizationStatus.requireVerification:
+            if (state.location.startsWith('/auth/email-verification')) return null;
+            return '/auth/email-verification';
         }
       },
       refreshListenable: context.read<ValueNotifier<AuthorizationStatus>>(),

@@ -18,6 +18,8 @@ abstract class AuthRepository {
   User? getCurrentUser();
 
   Future<void> signOut();
+
+  Future<void> reload();
 }
 
 class WeakPasswordException extends BaseException {

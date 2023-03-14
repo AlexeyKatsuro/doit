@@ -12,15 +12,18 @@ abstract class AuthStoreBase with Store {
 
   final AuthRepository _authRepository;
 
-  late final ObservableStream<User?> _observableUser =
+  late final ObservableStream<User?> observableUser =
       ObservableStream(_authRepository.observeSignIn());
 
   @computed
   AuthorizationStatus get status {
-    if (_observableUser.hasError) return AuthorizationStatus.processing;
-    return _observableUser.value == null
+    if (observableUser.hasError) return AuthorizationStatus.processing;
+    final user = observableUser.value;
+    return user == null
         ? AuthorizationStatus.unauthorized
-        : AuthorizationStatus.authorized;
+        : user.isVerified
+            ? AuthorizationStatus.authorized
+            : AuthorizationStatus.requireVerification;
   }
 
   @action
