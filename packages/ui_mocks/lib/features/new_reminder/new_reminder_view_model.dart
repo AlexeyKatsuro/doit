@@ -1,11 +1,13 @@
 import 'package:doit_ui_mocks/features/common/index.dart';
 import 'package:ui/ui.dart';
 
+const a = NewReminderViewModelMock();
+
 class NewReminderViewModelMock with MockCallbacks implements NewReminderViewModel {
   const NewReminderViewModelMock({
     this.title = const TextFieldViewModelMock(),
     this.subTitle = const TextFieldViewModelMock(),
-    this.selectedListName = 'Reminders',
+    this.selectedListName = const AsyncLoading(),
     this.isAddEnabled = false,
   });
 
@@ -16,7 +18,7 @@ class NewReminderViewModelMock with MockCallbacks implements NewReminderViewMode
   final TextFieldViewModel subTitle;
 
   @override
-  final String selectedListName;
+  final Async<String> selectedListName;
 
   @override
   final bool isAddEnabled;

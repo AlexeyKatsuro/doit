@@ -1,5 +1,6 @@
 export 'buttons/index.dart';
 export 'cards/app_card.dart';
+export 'error/index.dart';
 export 'loaders/index.dart';
 export 'menu/index.dart';
 export 'safe_area/index.dart';

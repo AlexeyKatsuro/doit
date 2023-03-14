@@ -1,22 +1,20 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/core.dart';
 import 'package:data/src/dto/index.dart';
 import 'package:domain/domain.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:injectable/injectable.dart';
 
-@LazySingleton(as: AuthRepository)
-class AuthRepositoryImpl extends AuthRepository {
-  AuthRepositoryImpl(this._firebaseAuth, this._firebaseFirestore);
+import 'firebase_repository.dart';
 
-  final fb.FirebaseAuth _firebaseAuth;
-  final FirebaseFirestore _firebaseFirestore;
+@LazySingleton(as: AuthRepository)
+class AuthRepositoryImpl extends FirebaseRepository with AuthRepository {
+  AuthRepositoryImpl(super.firebaseAuth, super.firebaseFirestore);
 
   @override
   User? getCurrentUser() {
-    final user = _firebaseAuth.currentUser;
+    final user = firebaseAuth.currentUser;
     return user == null
         ? null
         : User(
@@ -32,7 +30,7 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Stream<User?> observeSignIn() {
-    return _firebaseAuth.userChanges().map((fb.User? user) {
+    return firebaseAuth.userChanges().map((fb.User? user) {
       return user == null
           ? null
           : User(
@@ -48,7 +46,7 @@ class AuthRepositoryImpl extends AuthRepository {
     required String password,
   }) async {
     try {
-      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
+      final credential = await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -57,9 +55,9 @@ class AuthRepositoryImpl extends AuthRepository {
       await _firebaseFirestore.doc('/users/${user.uid}').set({
         'email': email,
       });
-      await _firebaseFirestore
+      await firebaseFirestore
           .collection('users')
-          .doc(credential.user?.uid.requireNotNull('user'))
+          .doc(user.uid)
           .collection('reminder_list')
           .doc(RemindersRepository.defaultListId)
           .set({'name': 'Reminders'});
@@ -84,7 +82,7 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<UserCredential> signInWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      final credential = await _firebaseAuth.signInWithEmailAndPassword(
+      final credential = await firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -105,7 +103,7 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<void> signOut() async {
     try {
-      await _firebaseAuth.signOut();
+      await firebaseAuth.signOut();
     } catch (error, stackTrack) {
       log('Error of signOut', error: error, stackTrace: stackTrack);
       rethrow;

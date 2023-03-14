@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:doit/common/view_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
@@ -10,8 +11,8 @@ part 'language_system_view_model.g.dart';
 @injectable
 class LanguageSystemViewModel = LanguageSystemViewModelBase with _$LanguageSystemViewModel;
 
-abstract class LanguageSystemViewModelBase with Store {
-  const LanguageSystemViewModelBase(this._languageStore);
+abstract class LanguageSystemViewModelBase extends ViewModel {
+  LanguageSystemViewModelBase(this._languageStore);
 
   final LanguageStore _languageStore;
 

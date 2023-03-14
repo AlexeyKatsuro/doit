@@ -1,6 +1,11 @@
 class Reminder {
-  Reminder(this.title, this.description);
+  Reminder({
+    required this.title,
+    required this.description,
+    required this.id,
+  });
 
+  final Object id;
   final String title;
-  final String description;
+  final String? description;
 }

@@ -1,3 +1,4 @@
+import 'package:doit/common/view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:localization/localization.dart';
 import 'package:mobx/mobx.dart';
@@ -7,7 +8,7 @@ part 'text_field_view_model.g.dart';
 
 class TextFieldViewModelImpl = TextFieldViewModelBase with _$TextFieldViewModelImpl;
 
-abstract class TextFieldViewModelBase with Store implements TextFieldViewModel {
+abstract class TextFieldViewModelBase extends ViewModel implements TextFieldViewModel {
   TextFieldViewModelBase({
     String? text,
     bool? resetErrorOnChange,

@@ -3,6 +3,8 @@ import 'package:localization/localization.dart';
 import 'package:ui/ui.dart';
 import 'package:ui_kit/ui_kit.dart';
 
+import 'widgets/selected_list_tile.dart';
+
 class NewReminderPage extends StatelessWidget {
   const NewReminderPage({super.key, required this.viewModel});
 
@@ -50,18 +52,8 @@ class NewReminderPage extends StatelessWidget {
               trailing: const NavTrailing(),
             ),
           ),
-          AppCard(
-            child: AppTile(
-              onTap: viewModel.onListPressed,
-              title: Text(l10n.newReminderList),
-              trailing: NavTrailing(
-                label: Observer(
-                  builder: (context) {
-                    return Text(viewModel.selectedListName);
-                  },
-                ),
-              ),
-            ),
+          SelectedListTile(
+            viewModel: viewModel.selectedListViewModel,
           ),
         ].divide(
           divider: const Gap(16),

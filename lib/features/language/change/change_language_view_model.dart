@@ -1,10 +1,10 @@
 import 'dart:ui';
 
+import 'package:doit/common/view_model.dart';
 import 'package:doit/features/language/stores/language_store.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:localization/localization.dart';
-
 import 'package:mobx/mobx.dart';
 
 part 'change_language_view_model.g.dart';
@@ -12,7 +12,7 @@ part 'change_language_view_model.g.dart';
 @injectable
 class ChangeLanguageViewModel = ChangeLanguageViewModelBase with _$ChangeLanguageViewModel;
 
-abstract class ChangeLanguageViewModelBase with Store {
+abstract class ChangeLanguageViewModelBase extends ViewModel {
   ChangeLanguageViewModelBase(this._languageStore);
 
   final LanguageStore _languageStore;
