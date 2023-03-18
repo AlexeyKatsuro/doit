@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:core/core.dart';
 import 'package:data/src/dto/index.dart';
+import 'package:data/src/repositories/reminders_repository.dart';
 import 'package:domain/domain.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:injectable/injectable.dart';
@@ -25,7 +26,7 @@ class AuthRepositoryImpl extends FirebaseRepository with AuthRepository {
 
   @override
   Future<void> reload() {
-    return _firebaseAuth.currentUser?.reload() ?? Future.value();
+    return firebaseAuth.currentUser?.reload() ?? Future.value();
   }
 
   @override
@@ -52,14 +53,14 @@ class AuthRepositoryImpl extends FirebaseRepository with AuthRepository {
       );
       final user = credential.user.requireNotNull('user');
       await user.sendEmailVerification();
-      await _firebaseFirestore.doc('/users/${user.uid}').set({
+      await firebaseFirestore.doc('/users/${user.uid}').set({
         'email': email,
       });
       await firebaseFirestore
           .collection('users')
           .doc(user.uid)
           .collection('reminder_list')
-          .doc(RemindersRepository.defaultListId)
+          .doc(RemindersRepositoryImpl.defaultListId)
           .set({'name': 'Reminders'});
 
       return UserCredentialDto(credential: credential);

@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 abstract class MockCallbacks {
   @override
   dynamic noSuchMethod(Invocation invocation) {
+    if (!invocation.isMethod) return super.noSuchMethod(invocation);
+
     String name(Symbol s) => '$s'.replaceAll('Symbol', '');
     debugPrint('$runtimeType: ${name(invocation.memberName)}');
 

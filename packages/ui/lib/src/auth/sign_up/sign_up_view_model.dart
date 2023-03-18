@@ -1,6 +1,6 @@
 import 'package:ui/src/common/index.dart';
 
-abstract class SignUpViewModel {
+abstract class SignUpViewModel extends ViewModel {
   const SignUpViewModel();
 
   TextFieldViewModel get email;

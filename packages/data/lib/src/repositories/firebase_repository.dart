@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:meta/meta.dart';
 
 class FirebaseRepository {
-  const FirebaseRepository(this.firebaseAuth, this.firebaseFirestore);
+  const FirebaseRepository(this.firebaseFirestore, this.firebaseAuth);
 
   @protected
   final FirebaseFirestore firebaseFirestore;

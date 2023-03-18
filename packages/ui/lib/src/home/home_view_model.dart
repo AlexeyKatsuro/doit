@@ -1,7 +1,7 @@
 import 'package:localization/localization.dart';
 import 'package:ui/src/common/index.dart';
 
-abstract class HomeViewModel {
+abstract class HomeViewModel extends ViewModel {
   const HomeViewModel();
 
   TextFieldViewModel get search;
