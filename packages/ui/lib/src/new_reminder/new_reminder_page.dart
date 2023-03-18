@@ -3,8 +3,6 @@ import 'package:localization/localization.dart';
 import 'package:ui/ui.dart';
 import 'package:ui_kit/ui_kit.dart';
 
-import 'widgets/selected_list_tile.dart';
-
 class NewReminderPage extends StatelessWidget {
   const NewReminderPage({super.key, required this.viewModel});
 

@@ -12,7 +12,7 @@ part 'email_verification_view_model.g.dart';
 class EmailVerificationViewModelImpl = EmailVerificationViewModelBase
     with _$EmailVerificationViewModelImpl;
 
-abstract class EmailVerificationViewModelBase with Store implements EmailVerificationViewModel {
+abstract class EmailVerificationViewModelBase extends EmailVerificationViewModel with Store {
   EmailVerificationViewModelBase(this._authRepository, this._router, this._authStore);
 
   final AuthStore _authStore;

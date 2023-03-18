@@ -1,4 +1,3 @@
-import 'package:doit/common/view_model.dart';
 import 'package:doit/features/common/error_handling.dart';
 import 'package:doit/features/common/event.dart';
 import 'package:doit/features/common/stores/text_field_view_model.dart';
@@ -15,7 +14,7 @@ part 'sign_up_view_model.g.dart';
 @Injectable(as: SignUpViewModel)
 class SignUpViewModelImpl = SignUpViewModelBase with _$SignUpViewModelImpl;
 
-abstract class SignUpViewModelBase extends ViewModel implements SignUpViewModel {
+abstract class SignUpViewModelBase extends SignUpViewModel with Store {
   SignUpViewModelBase(this._authRepository, this._router);
 
   final GoRouter _router;

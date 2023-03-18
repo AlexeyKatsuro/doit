@@ -1,4 +1,3 @@
-import 'package:doit/common/view_model.dart';
 import 'package:doit/features/common/stores/text_field_view_model.dart';
 import 'package:doit/features/navigation/router.dart';
 import 'package:domain/domain.dart';
@@ -12,7 +11,7 @@ part 'home_view_model.g.dart';
 @Injectable(as: HomeViewModel)
 class HomeViewModelImpl = HomeViewModelBase with _$HomeViewModelImpl;
 
-abstract class HomeViewModelBase extends ViewModel implements HomeViewModel {
+abstract class HomeViewModelBase extends HomeViewModel with Store {
   HomeViewModelBase(
     this._authRepository,
     this._router,

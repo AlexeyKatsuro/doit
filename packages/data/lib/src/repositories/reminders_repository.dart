@@ -8,18 +8,20 @@ import 'firebase_repository.dart';
 class RemindersRepositoryImpl extends FirebaseRepository with RemindersRepository {
   RemindersRepositoryImpl(super.firebaseFirestore, super.firebaseAuth);
 
+  static const String defaultListId = 'default_list';
+
   @override
   Future<int> allReminderCount() async {
     return (await firebaseFirestore.collection('reminders').count().get()).count;
   }
 
   @override
-  Future<void> addReminder({required String title, String? description, String? listId}) async {
+  Future<void> addReminder({required String title, String? description, Object? listId}) async {
     await firebaseFirestore
         .collection('users')
         .doc(userId)
         .collection('reminder_list')
-        .doc(listId ?? RemindersRepository.defaultListId)
+        .doc(listId as String? ?? RemindersRepositoryImpl.defaultListId)
         .collection('reminders')
         .add({
       'title': title,
@@ -33,7 +35,7 @@ class RemindersRepositoryImpl extends FirebaseRepository with RemindersRepositor
         .collection('users')
         .doc(userId)
         .collection('reminder_list')
-        .doc(RemindersRepository.defaultListId)
+        .doc(RemindersRepositoryImpl.defaultListId)
         .withConverter(
           fromFirestore: (snapshot, options) {
             final data = snapshot.data().requireNotNull('data');

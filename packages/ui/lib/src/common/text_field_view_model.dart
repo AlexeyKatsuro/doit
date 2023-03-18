@@ -1,6 +1,7 @@
 import 'package:localization/localization.dart';
+import 'package:ui/src/common/index.dart';
 
-abstract class FormFieldViewModel<T> {
+abstract class FormFieldViewModel<T> extends ViewModel {
   const FormFieldViewModel();
 
   T get value;
@@ -10,7 +11,7 @@ abstract class FormFieldViewModel<T> {
   void onChanged(T value);
 }
 
-abstract class TextFieldViewModel implements FormFieldViewModel<String> {
+abstract class TextFieldViewModel extends FormFieldViewModel<String> {
   const TextFieldViewModel();
 
   String get text => value;

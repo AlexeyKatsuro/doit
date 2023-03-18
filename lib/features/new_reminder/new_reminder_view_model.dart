@@ -2,12 +2,11 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:core/core.dart';
-import 'package:doit/common/view_model.dart';
 import 'package:doit/features/common/index.dart';
+import 'package:doit/features/new_reminder/selected_list_view_model.dart';
 import 'package:domain/domain.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
-import 'package:localization/localization.dart';
 import 'package:mobx/mobx.dart';
 import 'package:ui/ui.dart';
 
@@ -16,16 +15,21 @@ import '../navigation/router.dart';
 part 'new_reminder_view_model.g.dart';
 
 @Injectable(as: NewReminderViewModel)
-class NewReminderViewModelImpl = NewReminderViewModelBase with _$NewReminderViewModelImpl;
+class NewReminderViewModelImpl extends NewReminderViewModelBase with _$NewReminderViewModelImpl {
+  NewReminderViewModelImpl(super.remindersRepository, super.router, super.selectedListViewModel);
 
-abstract class NewReminderViewModelBase extends ViewModel implements NewReminderViewModel {
-  NewReminderViewModelBase(this._remindersRepository, this._router);
+  @override
+  @postConstruct
+  void init() {
+    return super.init();
+  }
+}
+
+abstract class NewReminderViewModelBase extends NewReminderViewModel with Store {
+  NewReminderViewModelBase(this._remindersRepository, this._router, this.selectedListViewModel);
 
   final RemindersRepository _remindersRepository;
   final GoRouter _router;
-
-  @observable
-  Event<UiMessage?> errorEvent = Event(null);
 
   @override
   @observable
@@ -35,46 +39,27 @@ abstract class NewReminderViewModelBase extends ViewModel implements NewReminder
   @observable
   TextFieldViewModel subTitle = TextFieldViewModelImpl();
 
-  Async<ReminderList> selectedList = const AsyncLoading();
+  @override
+  final SelectedListViewModel selectedListViewModel;
+
+  SelectedListViewModelImpl get _selectedListViewModel =>
+      selectedListViewModel as SelectedListViewModelImpl;
 
   @override
   @computed
-  Async<String> get selectedListName => selectedList.map((data) => data.name);
-
-  @override
-  @computed
-  bool get isAddEnabled =>
-      title.text
-          .trim()
-          .isNotEmpty;
-
-
-  @override
-  @action
-  FutureOr<void> init() async {
-    try {
-    final
-    s
-    _remindersRepository
-    .getDefaultReminderList();
-    } catch (error, stackTrace) {
-    log('getDefaultReminderList fail',error: error, stackTrace: stackTrace);
-    }
-  }
+  bool get isAddEnabled => title.text.trim().isNotEmpty && selectedListViewModel.isLoaded;
 
   @action
   Future<void> _addReminder() async {
     try {
       await _remindersRepository.addReminder(
-        title: title.text.trim(),
-        description: subTitle.text
-            .trim()
-            .nullIfEmpty,
-      );
+          title: title.text.trim(),
+          description: subTitle.text.trim().nullIfEmpty,
+          listId: _selectedListViewModel.asLoaded);
       _router.goNamed(RouteNames.home);
     } catch (error, stackTrace) {
       log('addReminder error', error: error, stackTrace: stackTrace);
-      errorEvent = Event(error.toUiMessage());
+      // errorEvent = Event(error.toUiMessage());
     }
   }
 

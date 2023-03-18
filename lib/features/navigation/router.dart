@@ -1,5 +1,4 @@
 import 'package:doit/di/dependencies.dart';
-import 'package:doit/features/new_reminder/new_reminder_view_model.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -43,6 +42,7 @@ GoRouter routerBuilder(BuildContext context) => GoRouter(
           builder: (context, state) {
             return Provider<SignInViewModel>(
               create: (_) => injector(),
+              dispose: (context, vm) => vm.dispose(),
               builder: (context, _) => SignInPage(viewModel: Provider.of(context)),
             );
           },
@@ -53,6 +53,7 @@ GoRouter routerBuilder(BuildContext context) => GoRouter(
           builder: (context, state) {
             return Provider<SignUpViewModel>(
               create: (_) => injector(),
+              dispose: (context, vm) => vm.dispose(),
               builder: (context, _) => SignUpPage(viewModel: Provider.of(context)),
             );
           },
@@ -63,6 +64,7 @@ GoRouter routerBuilder(BuildContext context) => GoRouter(
           builder: (context, state) {
             return Provider<EmailVerificationViewModel>(
               create: (_) => injector(),
+              dispose: (context, vm) => vm.dispose(),
               builder: (context, _) => EmailVerificationPage(viewModel: Provider.of(context)),
             );
           },
@@ -73,6 +75,7 @@ GoRouter routerBuilder(BuildContext context) => GoRouter(
           builder: (context, state) {
             return Provider<HomeViewModel>(
               create: (_) => injector(),
+              dispose: (context, vm) => vm.dispose(),
               builder: (context, _) => HomePage(viewModel: Provider.of(context)),
             );
           },
@@ -81,11 +84,11 @@ GoRouter routerBuilder(BuildContext context) => GoRouter(
           path: '/${RouteNames.newReminder}',
           name: RouteNames.newReminder,
           builder: (context, state) {
-            return Provider<NewReminderViewModelImpl>(
-              create: (_) => injector()..init(),
+            return Provider<NewReminderViewModel>(
+              create: (_) => injector(),
               dispose: (context, vm) => vm.dispose(),
               builder: (context, _) => NewReminderPage(
-                viewModel: Provider.of<NewReminderViewModelImpl>(context),
+                viewModel: Provider.of(context),
               ),
             );
           },
