@@ -32,5 +32,7 @@
     }
   },
   "emailVerificationCheck": "Verify",
-  "emailVerificationCancel": "Cancel"
+  "emailVerificationCancel": "Cancel",
+  "listsBuilderNewTitle": "New list",
+  "listsBuilderFieldHint": "List Name"
 }

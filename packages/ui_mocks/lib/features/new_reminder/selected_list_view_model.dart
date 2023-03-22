@@ -1,3 +1,4 @@
+import 'package:doit_ui_mocks/features/common/fixtures.dart';
 import 'package:doit_ui_mocks/features/common/index.dart';
 import 'package:localization/localization.dart';
 import 'package:ui/ui.dart';
@@ -15,7 +16,7 @@ class SelectedListViewModelMock extends SelectedListViewModel {
 
   const SelectedListViewModelMock.error([
     SelectedListErrorViewModelMock this.state =
-        const SelectedListErrorViewModelMock(errorMessage: UiMessage.text('Something went wrong')),
+        const SelectedListErrorViewModelMock(errorMessage: errorMessage),
   ]);
 
   @override
@@ -24,7 +25,7 @@ class SelectedListViewModelMock extends SelectedListViewModel {
 
 class SelectedListLoadedViewModelMock extends SelectedListLoadedViewModel with MockCallbacks {
   const SelectedListLoadedViewModelMock({
-    this.selectedListName = const UiMessage.text('Reminders'),
+    this.selectedListName = const UiMessage.text(defaultListName),
   });
 
   @override
