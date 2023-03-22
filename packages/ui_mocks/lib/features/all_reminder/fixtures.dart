@@ -1,5 +1,6 @@
 import 'package:doit_ui_mocks/features/all_reminder/task_list_view_model.dart';
 import 'package:doit_ui_mocks/features/all_reminder/task_view_model.dart';
+import 'package:doit_ui_mocks/features/common/fixtures.dart';
 import 'package:doit_ui_mocks/features/common/index.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ui/ui.dart';
@@ -19,7 +20,7 @@ final allReminderPages = <String, WidgetBuilder>{
               ),
             )
           ]),
-          TaskListViewModelMock(name: 'Reminders', tasks: [
+          TaskListViewModelMock(name: defaultListName, tasks: [
             TaskViewModelMock(
               isCompleted: false,
               title: TextFieldViewModelMock(value: 'New second task'),

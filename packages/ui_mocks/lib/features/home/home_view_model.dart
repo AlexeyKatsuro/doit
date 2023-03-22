@@ -1,3 +1,4 @@
+import 'package:doit_ui_mocks/features/common/fixtures.dart';
 import 'package:doit_ui_mocks/features/common/index.dart';
 import 'package:localization/localization.dart';
 import 'package:ui/ui.dart';
@@ -48,7 +49,7 @@ class TaskListTileViewModelMock extends TaskListTileViewModel with MockCallbacks
   const TaskListTileViewModelMock({
     this.count = 0,
     this.icon = IconType.list,
-    this.name = const UiMessage.text('Reminders'),
+    this.name = const UiMessage.text(defaultListName),
   });
 
   @override

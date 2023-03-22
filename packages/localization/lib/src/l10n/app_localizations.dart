@@ -252,6 +252,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get emailVerificationCancel;
+
+  /// No description provided for @listsBuilderNewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New list'**
+  String get listsBuilderNewTitle;
+
+  /// No description provided for @listsBuilderFieldHint.
+  ///
+  /// In en, this message translates to:
+  /// **'List Name'**
+  String get listsBuilderFieldHint;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
