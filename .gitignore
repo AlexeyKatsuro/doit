@@ -89,9 +89,6 @@ app.*.map.json
 # Ignore golden tests failures
 **/failures/*.png
 
-# Ignore lock files. As pubspec.lock and Podfile.lock
-*.lock
-
 # Ignore generated dart files
 **/*.gr.dart
 **/*.g.dart
