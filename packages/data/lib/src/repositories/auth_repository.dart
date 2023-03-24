@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:core/core.dart';
 import 'package:data/src/dto/index.dart';
-import 'package:data/src/repositories/reminders_repository.dart';
 import 'package:domain/domain.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:injectable/injectable.dart';
 
 import 'firebase_repository.dart';
+import 'lists_repository.dart';
 
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl extends FirebaseRepository with AuthRepository {
@@ -60,7 +60,7 @@ class AuthRepositoryImpl extends FirebaseRepository with AuthRepository {
           .collection('users')
           .doc(user.uid)
           .collection('reminder_list')
-          .doc(RemindersRepositoryImpl.defaultListId)
+          .doc(ListsRepositoryImpl.defaultListId)
           .set({'name': 'Reminders'});
 
       return UserCredentialDto(credential: credential);

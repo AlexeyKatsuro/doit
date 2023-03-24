@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:doit/features/common/index.dart';
 import 'package:domain/domain.dart';
-import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:localization/localization.dart';
 import 'package:mobx/mobx.dart';
@@ -13,7 +12,7 @@ part 'selected_list_view_model.g.dart';
 
 @Injectable(as: SelectedListViewModel)
 class SelectedListViewModelImpl extends SelectedListViewModelBase with _$SelectedListViewModelImpl {
-  SelectedListViewModelImpl(super.remindersRepository, super.router);
+  SelectedListViewModelImpl(super.remindersRepository);
 
   @override
   @postConstruct
@@ -23,10 +22,9 @@ class SelectedListViewModelImpl extends SelectedListViewModelBase with _$Selecte
 }
 
 abstract class SelectedListViewModelBase extends SelectedListViewModel with Store {
-  SelectedListViewModelBase(this._remindersRepository, this._router);
+  SelectedListViewModelBase(this._listsRepository);
 
-  final RemindersRepository _remindersRepository;
-  final GoRouter _router;
+  final ListsRepository _listsRepository;
 
   @override
   @observable
@@ -44,7 +42,7 @@ abstract class SelectedListViewModelBase extends SelectedListViewModel with Stor
   Future<void> _fetchDefaultReminderList() async {
     state = const SelectedListLoadingViewModelImpl();
     try {
-      final defaultReminderList = await _remindersRepository.getDefaultReminderList();
+      final defaultReminderList = await _listsRepository.getDefaultReminderList();
       state = SelectedListLoadedViewModelImpl(
         listId: defaultReminderList.id,
         selectedListName: UiMessage.text(defaultReminderList.name),

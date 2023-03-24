@@ -34,6 +34,32 @@ abstract class Async<T> {
     if (object is AsyncLoading) return loading();
     throw ArgumentError('Unknown type $runtimeType');
   }
+
+  R whenOrElse<R>({
+    R Function(T data)? loaded,
+    R Function(UiMessage errorMessage)? error,
+    R Function()? loading,
+    required R Function() orElse,
+  }) {
+    return when(
+      loaded: loaded ?? (_) => orElse(),
+      error: error ?? (error) => orElse(),
+      loading: loading ?? orElse,
+    );
+  }
+
+  R? whenOrNull<R>({
+    R Function(T data)? loaded,
+    R Function(UiMessage errorMessage)? error,
+    R Function()? loading,
+  }) {
+    return whenOrElse(
+      loaded: loaded,
+      error: error,
+      loading: loading,
+      orElse: () => null,
+    );
+  }
 }
 
 class AsyncResult<T> extends Async<T> {

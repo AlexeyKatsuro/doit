@@ -1,8 +1,12 @@
 import 'package:localization/localization.dart';
 import 'package:ui/ui.dart';
 
-abstract class ListBuilderViewModelPage {
-  const ListBuilderViewModelPage();
+abstract class NewListPageViewModel extends ListCommonPageViewModel {}
+
+abstract class EditListPageViewModel extends ListCommonPageViewModel {}
+
+abstract class ListCommonPageViewModel extends ViewModel {
+  const ListCommonPageViewModel();
 
   UiMessage get title;
 

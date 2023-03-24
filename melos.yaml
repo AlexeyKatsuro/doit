@@ -25,7 +25,7 @@ scripts:
   gen-code:
     exec: flutter pub run build_runner build --delete-conflicting-outputs
     select-package:
-      dependsOn: build_runner
+      depends-on: build_runner
 
   gen-code:all:
     run: melos run gen-code --no-select

@@ -11,6 +11,7 @@ abstract class RouteNames {
   static const emailVerification = 'email-verification';
   static const home = 'home';
   static const newReminder = 'new-reminder';
+  static const newList = 'new-list';
 }
 
 GoRouter routerBuilder(BuildContext context) => GoRouter(
@@ -89,6 +90,19 @@ GoRouter routerBuilder(BuildContext context) => GoRouter(
               dispose: (context, vm) => vm.dispose(),
               builder: (context, _) => NewReminderPage(
                 viewModel: Provider.of(context),
+              ),
+            );
+          },
+        ),
+        GoRoute(
+          path: '/${RouteNames.newList}',
+          name: RouteNames.newList,
+          builder: (context, state) {
+            return Provider<NewListPageViewModel>(
+              create: (_) => injector(),
+              dispose: (context, vm) => vm.dispose(),
+              builder: (context, _) => ListCommonPage(
+                viewModel: Provider.of<NewListPageViewModel>(context),
               ),
             );
           },

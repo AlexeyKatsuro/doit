@@ -79,6 +79,11 @@ class HomePage extends StatelessWidget {
                 const Gap(20),
                 Text(l10n.homeMyListsHeader, style: theme.textTheme.titleLarge),
                 const Gap(8),
+                AppButtonOutlined(
+                  onPressed: viewModel.onAddListPressed,
+                  child: Text(l10n.homeAddList),
+                ),
+                const Gap(8),
                 AppCard(
                   clipBehavior: Clip.antiAlias,
                   child: Observer(builder: (context) {
