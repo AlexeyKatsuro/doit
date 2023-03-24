@@ -2,7 +2,7 @@ import 'package:doit_ui_mocks/features/common/index.dart';
 import 'package:localization/localization.dart';
 import 'package:ui/ui.dart';
 
-class ListBuilderViewModelPageMock extends ListBuilderViewModelPage with MockCallbacks {
+class ListBuilderViewModelPageMock extends ListCommonPageViewModel with MockCallbacks {
   const ListBuilderViewModelPageMock({
     required this.title,
     required this.listNameField,

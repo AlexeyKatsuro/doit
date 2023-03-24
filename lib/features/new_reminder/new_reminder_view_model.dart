@@ -53,9 +53,10 @@ abstract class NewReminderViewModelBase extends NewReminderViewModel with Store 
   Future<void> _addReminder() async {
     try {
       await _remindersRepository.addReminder(
-          title: title.text.trim(),
-          description: subTitle.text.trim().nullIfEmpty,
-          listId: _selectedListViewModel.asLoaded);
+        title: title.text.trim(),
+        description: subTitle.text.trim().nullIfEmpty,
+        listId: _selectedListViewModel.asLoaded.listId,
+      );
       _router.goNamed(RouteNames.home);
     } catch (error, stackTrace) {
       log('addReminder error', error: error, stackTrace: stackTrace);

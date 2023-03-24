@@ -7,13 +7,13 @@ import 'package:ui/ui.dart';
 import 'list_builder_view_model_page.dart';
 
 final listBuilderPages = <String, WidgetBuilder>{
-  '/list-builder/0-loading': (_) => const ListBuilderPage(viewModel: loading),
-  '/list-builder/1-error': (_) => const ListBuilderPage(viewModel: error),
-  '/list-builder/2-loaded-idle': (_) => const ListBuilderPage(viewModel: loadedIdle),
-  '/list-builder/3-loaded-filled': (_) => const ListBuilderPage(viewModel: loadedIdle),
-  '/list-builder/4-loaded-loading': (_) => const ListBuilderPage(viewModel: loadedUploading),
-  '/list-builder/5-loaded-error': (_) => const ListBuilderPage(viewModel: loadedError),
-  '/list-builder/6-loaded-done': (_) => const ListBuilderPage(viewModel: loadedDone),
+  '/list-builder/0-loading': (_) => const ListCommonPage(viewModel: loading),
+  '/list-builder/1-error': (_) => const ListCommonPage(viewModel: error),
+  '/list-builder/2-loaded-idle': (_) => const ListCommonPage(viewModel: loadedIdle),
+  '/list-builder/3-loaded-filled': (_) => const ListCommonPage(viewModel: loadedIdle),
+  '/list-builder/4-loaded-loading': (_) => const ListCommonPage(viewModel: loadedUploading),
+  '/list-builder/5-loaded-error': (_) => const ListCommonPage(viewModel: loadedError),
+  '/list-builder/6-loaded-done': (_) => const ListCommonPage(viewModel: loadedDone),
 };
 
 const loading = ListBuilderViewModelPageMock(

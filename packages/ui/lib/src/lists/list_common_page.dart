@@ -3,10 +3,10 @@ import 'package:localization/localization.dart';
 import 'package:ui/ui.dart';
 import 'package:ui_kit/ui_kit.dart';
 
-class ListBuilderPage extends StatelessWidget {
-  const ListBuilderPage({super.key, required this.viewModel});
+class ListCommonPage extends StatelessWidget {
+  const ListCommonPage({super.key, required this.viewModel});
 
-  final ListBuilderViewModelPage viewModel;
+  final ListCommonPageViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {

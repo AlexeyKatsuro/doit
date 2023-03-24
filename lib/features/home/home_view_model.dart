@@ -15,11 +15,9 @@ abstract class HomeViewModelBase extends HomeViewModel with Store {
   HomeViewModelBase(
     this._authRepository,
     this._router,
-    this._remindersRepository,
   );
 
   final AuthRepository _authRepository;
-  final RemindersRepository _remindersRepository;
   final GoRouter _router;
 
   @override
@@ -39,7 +37,6 @@ abstract class HomeViewModelBase extends HomeViewModel with Store {
 
   @action
   Future<void> _onInit() async {
-    final count = await _remindersRepository.allReminderCount();
     lists = [];
   }
 
@@ -60,7 +57,7 @@ abstract class HomeViewModelBase extends HomeViewModel with Store {
 
   @override
   void onAddListPressed() {
-    // TODO: implement onAddListPressed
+    _router.pushNamed(RouteNames.newList);
   }
 
   @override
