@@ -14,10 +14,7 @@ class ListsRepositoryImpl extends FirebaseRepository with ListsRepository {
 
   @override
   Future<ReminderListDto> getDefaultReminderList() {
-    return firebaseFirestore
-        .collection('users')
-        .doc(userId)
-        .collection('reminder_list')
+    return reminderList
         .doc(ListsRepositoryImpl.defaultListId)
         .withConverter(
           fromFirestore: (snapshot, options) {
@@ -36,29 +33,21 @@ class ListsRepositoryImpl extends FirebaseRepository with ListsRepository {
 
   @override
   Future<void> addList({required String name}) {
-    return firebaseFirestore.collection('users').doc(userId).collection('reminder_list').add({
+    return reminderList.add({
       'name': name,
     });
   }
 
   @override
   Future<void> editList({required covariant ReminderListDto list}) {
-    return firebaseFirestore
-        .collection('users')
-        .doc(userId)
-        .collection('reminder_list')
-        .doc(list.id)
-        .update({
+    return reminderList.doc(list.id).update({
       'name': list.name,
     });
   }
 
   @override
-  Future<List<ReminderList>> getAllLists() {
-    return firebaseFirestore
-        .collection('users')
-        .doc(userId)
-        .collection('reminder_list')
+  Future<List<ReminderListDto>> getAllLists() {
+    return reminderList
         .withConverter(
           fromFirestore: (snapshot, options) {
             final data = snapshot.data().requireNotNull('data');
@@ -72,7 +61,22 @@ class ListsRepositoryImpl extends FirebaseRepository with ListsRepository {
         )
         .get()
         .then((snapshot) {
-      return snapshot.docs.map((doc) => doc.data()).toList(growable: false);
+      return snapshot.docs.map((doc) {
+        return doc.data();
+      }).toList(growable: false);
     });
+  }
+
+  @override
+  Future<List<CountOf<ReminderListDto>>> getAllListsWithCount() async {
+    // TODO Make more efficient impl
+    return Stream.fromIterable(await getAllLists()).asyncMap((list) async {
+      return reminderList
+          .doc(list.id)
+          .collection('reminders')
+          .count()
+          .get()
+          .then((value) => CountOf(data: list, count: value.count));
+    }).toList();
   }
 }

@@ -17,39 +17,41 @@ final listBuilderPages = <String, WidgetBuilder>{
 };
 
 const loading = ListBuilderViewModelPageMock(
-    title: UiMessage.text('New List'), submitStatus: Upload.idle(), listNameField: Async.loading());
+    title: UiMessage.text('New List'),
+    submitStatus: Upload.idle(),
+    listNameField: AsyncMock.loading());
 
 const error = ListBuilderViewModelPageMock(
     title: UiMessage.text('New List'),
     submitStatus: Upload.idle(),
-    listNameField: Async.error(errorMessage));
+    listNameField: AsyncMock.error(errorMessage));
 
 const loadedIdle = ListBuilderViewModelPageMock(
   title: UiMessage.text('New List'),
-  listNameField: Async.result(TextFieldViewModelMock()),
+  listNameField: AsyncMock.result(TextFieldViewModelMock()),
   submitStatus: Upload.idle(),
 );
 
 const loadedFiled = ListBuilderViewModelPageMock(
   title: UiMessage.text('New List'),
-  listNameField: Async.result(TextFieldViewModelMock(value: defaultListName)),
+  listNameField: AsyncMock.result(TextFieldViewModelMock(value: defaultListName)),
   submitStatus: Upload.idle(),
 );
 
 const loadedUploading = ListBuilderViewModelPageMock(
   title: UiMessage.text('New List'),
-  listNameField: Async.result(TextFieldViewModelMock(value: defaultListName)),
+  listNameField: AsyncMock.result(TextFieldViewModelMock(value: defaultListName)),
   submitStatus: Upload.loading(),
 );
 
 const loadedError = ListBuilderViewModelPageMock(
   title: UiMessage.text('New List'),
-  listNameField: Async.result(TextFieldViewModelMock(value: defaultListName)),
+  listNameField: AsyncMock.result(TextFieldViewModelMock(value: defaultListName)),
   submitStatus: Upload.error(errorMessage),
 );
 
 const loadedDone = ListBuilderViewModelPageMock(
   title: UiMessage.text('New List'),
-  listNameField: Async.result(TextFieldViewModelMock(value: defaultListName)),
+  listNameField: AsyncMock.result(TextFieldViewModelMock(value: defaultListName)),
   submitStatus: Upload.done(),
 );

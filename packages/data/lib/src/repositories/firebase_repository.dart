@@ -11,4 +11,9 @@ class FirebaseRepository {
   final FirebaseAuth firebaseAuth;
 
   String get userId => (firebaseAuth.currentUser?.uid).requireNotNull('user');
+
+  DocumentReference get userDoc => firebaseFirestore.collection('users').doc(userId);
+
+  CollectionReference<Map<String, dynamic>> get reminderList =>
+      firebaseFirestore.collection('users').doc(userId).collection('reminder_list');
 }

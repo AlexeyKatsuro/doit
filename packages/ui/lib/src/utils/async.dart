@@ -1,13 +1,9 @@
+import 'dart:ui';
+
 import 'package:localization/localization.dart';
 
 abstract class Async<T> {
   const Async();
-
-  const factory Async.result(T data) = AsyncResult<T>;
-
-  const factory Async.error(UiMessage error) = AsyncError;
-
-  const factory Async.loading() = AsyncLoading;
 
   T? get data => null;
 
@@ -15,67 +11,41 @@ abstract class Async<T> {
 
   bool get isLoading => false;
 
-  Async<R> map<R>(R Function(T data) transform) {
-    final object = this;
-    if (object is AsyncResult<T>) return AsyncResult(transform(object.data));
-    if (object is AsyncError) return object;
-    if (object is AsyncLoading) return object;
-    throw ArgumentError('Unknown type $runtimeType');
-  }
+  Async<R> map<R>(R Function(T data) transform);
 
   R when<R>({
     required R Function(T data) loaded,
-    required R Function(UiMessage errorMessage) error,
+    required R Function(UiMessage errorMessage, VoidCallback? onRetry) error,
     required R Function() loading,
+  });
+
+  R? _nullForLoaded<R>(T data) => null;
+
+  R? _nullForError<R>(UiMessage errorMessage, VoidCallback? onRetry) => null;
+
+  R? _nullForLoading<R>() => null;
+
+  R? whenOrNull<R>({
+    R Function(T data)? loaded,
+    R Function(UiMessage errorMessage, VoidCallback? onRetry)? error,
+    R Function()? loading,
   }) {
-    final object = this;
-    if (object is AsyncResult<T>) return loaded(object.data);
-    if (object is AsyncError) return error(object.errorMessage);
-    if (object is AsyncLoading) return loading();
-    throw ArgumentError('Unknown type $runtimeType');
+    return when(
+      loaded: loaded ?? _nullForLoaded,
+      error: error ?? _nullForError,
+      loading: loading ?? _nullForLoading,
+    );
   }
 
   R whenOrElse<R>({
     R Function(T data)? loaded,
-    R Function(UiMessage errorMessage)? error,
+    R Function(UiMessage errorMessage, VoidCallback? onRetry)? error,
     R Function()? loading,
     required R Function() orElse,
   }) {
-    return when(
-      loaded: loaded ?? (_) => orElse(),
-      error: error ?? (error) => orElse(),
-      loading: loading ?? orElse,
-    );
-  }
-
-  R? whenOrNull<R>({
-    R Function(T data)? loaded,
-    R Function(UiMessage errorMessage)? error,
-    R Function()? loading,
-  }) {
-    return whenOrElse(
-      loaded: loaded,
-      error: error,
-      loading: loading,
-      orElse: () => null,
-    );
+    return whenOrNull<R>(loaded: loaded, error: error, loading: loading) ?? orElse();
   }
 }
 
-class AsyncResult<T> extends Async<T> {
-  const AsyncResult(this.data);
 
-  @override
-  final T data;
-}
 
-class AsyncError extends Async<Never> {
-  const AsyncError(this.errorMessage);
-
-  @override
-  final UiMessage errorMessage;
-}
-
-class AsyncLoading extends Async<Never> {
-  const AsyncLoading();
-}
