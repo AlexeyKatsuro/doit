@@ -13,7 +13,7 @@ abstract class ListCommonPageViewModel extends ViewModel {
   Async<TextFieldViewModel> get listNameField;
 
   bool get isSubmitEnabled {
-    bool notEnabled([_]) => false;
+    bool notEnabled([_, __]) => false;
 
     return listNameField.when(
       loaded: (data) {

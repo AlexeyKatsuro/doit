@@ -3,6 +3,7 @@ import 'package:localization/localization.dart';
 import 'package:ui/src/common/factories/index.dart';
 import 'package:ui/src/home/home_view_model.dart';
 import 'package:ui/src/home/widgets/dashboard_card.dart';
+import 'package:ui/src/utils/async_builder.dart';
 import 'package:ui_kit/ui_kit.dart';
 
 import 'widgets/task_list_tile.dart';
@@ -65,17 +66,20 @@ class HomePage extends StatelessWidget {
                   );
                 }),
                 const Gap(16),
-                Observer(builder: (context) {
-                  return SliverGridIntrinsicRow(
-                    itemCount: viewModel.dashboard.length,
-                    crossAxisCount: 2,
-                    itemBuilder: (BuildContext context, int index) {
-                      return DashboardTile(
-                        viewModel: viewModel.dashboard[index],
-                      );
-                    },
-                  );
-                }),
+                AsyncBuilder(
+                  async: viewModel.dashboard,
+                  loaded: (context, dashboard) {
+                    return SliverGridIntrinsicRow(
+                      itemCount: dashboard.length,
+                      crossAxisCount: 2,
+                      itemBuilder: (BuildContext context, int index) {
+                        return DashboardTile(
+                          viewModel: dashboard[index],
+                        );
+                      },
+                    );
+                  },
+                ),
                 const Gap(20),
                 Text(l10n.homeMyListsHeader, style: theme.textTheme.titleLarge),
                 const Gap(8),
@@ -86,14 +90,17 @@ class HomePage extends StatelessWidget {
                 const Gap(8),
                 AppCard(
                   clipBehavior: Clip.antiAlias,
-                  child: Observer(builder: (context) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        for (final list in viewModel.lists) TaskListTile(viewModel: list),
-                      ],
-                    );
-                  }),
+                  child: AsyncBuilder(
+                    async: viewModel.lists,
+                    loaded: (context, lists) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          for (final list in lists) TaskListTile(viewModel: list),
+                        ],
+                      );
+                    },
+                  ),
                 )
               ],
             ),

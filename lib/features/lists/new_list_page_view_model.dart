@@ -20,7 +20,7 @@ class NewListPageViewModelImpl extends NewListPageViewModelBase with _$NewListPa
   void init() => super.init();
 }
 
-abstract class NewListPageViewModelBase extends NewListPageViewModel with Store {
+abstract class NewListPageViewModelBase extends NewListPageViewModel with Store, RunAsync {
   NewListPageViewModelBase(this._listsRepository, this._router);
 
   final ListsRepository _listsRepository;
@@ -31,8 +31,7 @@ abstract class NewListPageViewModelBase extends NewListPageViewModel with Store 
   UiMessage get title => const UiMessage.text('New List');
 
   @override
-  @observable
-  Async<TextFieldViewModel> listNameField = Async.result(TextFieldViewModelImpl());
+  late final Async<TextFieldViewModel> listNameField = completeAsync(TextFieldViewModelImpl());
 
   @override
   @computed

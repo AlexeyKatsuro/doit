@@ -1,14 +1,15 @@
 import 'package:localization/localization.dart';
 import 'package:ui/src/common/index.dart';
+import 'package:ui/src/utils/async.dart';
 
 abstract class HomeViewModel extends ViewModel {
   const HomeViewModel();
 
   TextFieldViewModel get search;
 
-  List<DashboardTileViewModel> get dashboard;
+  Async<List<DashboardTileViewModel>> get dashboard;
 
-  List<TaskListTileViewModel> get lists;
+  Async<List<TaskListTileViewModel>> get lists;
 
   bool get isEditMode;
 

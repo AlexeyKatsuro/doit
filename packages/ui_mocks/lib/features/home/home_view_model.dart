@@ -5,9 +5,9 @@ import 'package:ui/ui.dart';
 
 class HomeViewModelMock extends HomeViewModel with MockCallbacks {
   HomeViewModelMock({
-    this.dashboard = const [],
+    required this.dashboard,
     this.isEditMode = false,
-    this.lists = const [],
+    required this.lists,
     this.search = const TextFieldViewModelMock(),
   });
 
@@ -15,13 +15,13 @@ class HomeViewModelMock extends HomeViewModel with MockCallbacks {
   final TextFieldViewModel search;
 
   @override
-  final List<DashboardTileViewModel> dashboard;
+  final Async<List<DashboardTileViewModel>> dashboard;
 
   @override
   final bool isEditMode;
 
   @override
-  final List<TaskListTileViewModel> lists;
+  final Async<List<TaskListTileViewModel>> lists;
 }
 
 class DashboardTileViewModelMock extends DashboardTileViewModel with MockCallbacks {

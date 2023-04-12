@@ -1,5 +1,6 @@
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:localization/localization.dart';
+import 'package:ui/src/utils/async_builder.dart';
 import 'package:ui/ui.dart';
 import 'package:ui_kit/ui_kit.dart';
 
@@ -45,8 +46,9 @@ class ListCommonPage extends StatelessWidget {
         child: Column(
           children: [
             Observer(builder: (context) {
-              return viewModel.listNameField.when(
-                loaded: (nameTextField) {
+              return AsyncBuilder(
+                async: viewModel.listNameField,
+                loaded: (context, nameTextField) {
                   return AppTextField.new.fromViewModel(
                     nameTextField,
                     l10n: l10n,
@@ -54,10 +56,7 @@ class ListCommonPage extends StatelessWidget {
                     errorText: viewModel.submitStatus.errorMessage?.tryLocalize(l10n),
                   );
                 },
-                error: (errorMessage) {
-                  return AppCardError(label: Text(errorMessage.localize(l10n)));
-                },
-                loading: () {
+                loading: (context) {
                   return AppTextField(
                     text: null,
                     readOnly: true,

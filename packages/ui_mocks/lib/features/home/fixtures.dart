@@ -1,3 +1,4 @@
+import 'package:doit_ui_mocks/features/common/index.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:ui/ui.dart';
@@ -9,8 +10,8 @@ final homePages = <String, WidgetBuilder>{
 };
 
 final loadedHomeViewModel = HomeViewModelMock(
-  dashboard: dashboardList,
-  lists: lists,
+  dashboard: const AsyncMock.result(dashboardList),
+  lists: const AsyncMock.result(lists),
 );
 
 const dashboardList = [
