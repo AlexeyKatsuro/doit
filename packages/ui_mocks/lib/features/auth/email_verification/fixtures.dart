@@ -4,6 +4,6 @@ import 'package:ui/ui.dart';
 import 'email_verification_view_model.dart';
 
 final emailVerificationPages = <String, WidgetBuilder>{
-  '/email-verification': (_) =>
+  '/auth/email-verification': (_) =>
       const EmailVerificationPage(viewModel: EmailVerificationViewModelMock()),
 };

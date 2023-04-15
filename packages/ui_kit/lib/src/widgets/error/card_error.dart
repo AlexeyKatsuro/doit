@@ -17,7 +17,7 @@ class AppCardError extends StatelessWidget {
         onTap: onPressed,
         title: label,
         leading: const Icon(Icons.error),
-        trailing: const Icon(Icons.refresh_rounded),
+        trailing: onPressed != null ? const Icon(Icons.refresh_rounded) : null,
       ),
     );
   }

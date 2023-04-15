@@ -12,7 +12,7 @@ enum IconType {
 extension IconTypeExt on IconType {
   IconData toMaterialIconData() {
     switch (this) {
-      case IconType.calendar:
+        case IconType.calendar:
         return Icons.calendar_today_rounded;
       case IconType.schedule:
         return Icons.calendar_month_rounded;

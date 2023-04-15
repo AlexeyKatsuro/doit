@@ -1,32 +1,47 @@
 import 'dart:ui';
 
+import 'package:doit_ui_mocks/features/common/fixtures.dart' as fixtures;
 import 'package:localization/localization.dart';
 import 'package:ui/ui.dart';
 
-abstract class AsyncMock<T> extends Async<T> {
-  const AsyncMock();
+const noData = Object();
 
-  const factory AsyncMock.result(T data) = AsyncResult<T>;
+class AsyncMock<T> extends Async<T> {
+  const AsyncMock._({
+    Object? data = noData,
+    this.isLoading = false,
+    this.errorMessage,
+    this.onRetry,
+  }) : _data = data;
 
-  const factory AsyncMock.error(UiMessage error) = AsyncError;
+  const AsyncMock.result(T data) : this._(data: data);
 
-  const factory AsyncMock.loading() = AsyncLoading;
+  const AsyncMock.error(UiMessage error, {VoidCallback? onRetry})
+      : this._(errorMessage: error, onRetry: onRetry);
+
+  const AsyncMock.errorWithRetry(UiMessage error, {VoidCallback? onRetry = fixtures.onRetry})
+      : this._(errorMessage: error, onRetry: onRetry);
+
+  const AsyncMock.loading() : this._(isLoading: true);
+
+  final Object? _data;
 
   @override
-  T? get data => null;
+  T? get data => _data == noData ? null : _data as T?;
 
   @override
-  UiMessage? get errorMessage => null;
+  final UiMessage? errorMessage;
+
+  final VoidCallback? onRetry;
 
   @override
-  bool get isLoading => false;
+  final bool isLoading;
 
   @override
   Async<R> map<R>(R Function(T data) transform) {
-    final object = this;
-    if (object is AsyncResult<T>) return AsyncResult(transform(object.data));
-    if (object is AsyncError) return object;
-    if (object is AsyncLoading) return object;
+    if (_data != noData) return AsyncMock.result(transform(data as T));
+    if (errorMessage != null) return AsyncMock.error(errorMessage!, onRetry: onRetry);
+    if (isLoading) return const AsyncMock.loading();
     throw ArgumentError('Unknown type $runtimeType');
   }
 
@@ -37,31 +52,9 @@ abstract class AsyncMock<T> extends Async<T> {
     required R Function() loading,
   }) {
     final object = this;
-    if (object is AsyncResult<T>) return loaded(object.data);
-    if (object is AsyncError) return error(object.errorMessage, object.onRetry);
-    if (object is AsyncLoading) return loading();
+    if (_data != noData) return loaded(data as T);
+    if (errorMessage != null) return error(errorMessage!, object.onRetry);
+    if (isLoading) return loading();
     throw ArgumentError('Unknown type $runtimeType');
   }
-}
-
-class AsyncResult<T> extends AsyncMock<T> {
-  const AsyncResult(this.data);
-
-  @override
-  final T data;
-}
-
-class AsyncError extends AsyncMock<Never> {
-  const AsyncError(
-    this.errorMessage, {
-    this.onRetry,
-  });
-
-  @override
-  final UiMessage errorMessage;
-  final VoidCallback? onRetry;
-}
-
-class AsyncLoading extends AsyncMock<Never> {
-  const AsyncLoading();
 }

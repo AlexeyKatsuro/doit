@@ -264,6 +264,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'List Name'**
   String get listsBuilderFieldHint;
+
+  /// No description provided for @selectListTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'List'**
+  String get selectListTitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

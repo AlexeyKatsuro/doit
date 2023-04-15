@@ -3,5 +3,5 @@ import 'package:flutter/widgets.dart';
 import 'package:ui/ui.dart';
 
 final signUpPages = <String, WidgetBuilder>{
-  '/sign-up': (_) => const SignUpPage(viewModel: SignUpViewModelMock()),
+  '/auth/sign-up': (_) => const SignUpPage(viewModel: SignUpViewModelMock()),
 };

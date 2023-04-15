@@ -34,5 +34,6 @@
   "emailVerificationCheck": "Verify",
   "emailVerificationCancel": "Cancel",
   "listsBuilderNewTitle": "New list",
-  "listsBuilderFieldHint": "List Name"
+  "listsBuilderFieldHint": "List Name",
+  "selectListTitle": "List"
 }
