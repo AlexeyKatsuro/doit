@@ -6,7 +6,7 @@ import 'package:ui/ui.dart';
 import 'home_view_model.dart';
 
 final homePages = <String, WidgetBuilder>{
-  '/home': (_) => HomePage(viewModel: loadedHomeViewModel),
+  '/home/loaded': (_) => HomePage(viewModel: loadedHomeViewModel),
 };
 
 final loadedHomeViewModel = HomeViewModelMock(

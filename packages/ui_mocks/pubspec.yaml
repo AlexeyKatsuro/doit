@@ -16,6 +16,8 @@ dependencies:
     path: ../localization
   ui:
     path: ../ui
+  ui_kit:
+    path: ../ui_kit
 
   # Uses only to disable `enableWarnWhenNoObservables` assetrion
   flutter_mobx: ^2.0.6+5

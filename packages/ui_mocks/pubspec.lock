@@ -257,7 +257,7 @@ packages:
     source: path
     version: "0.0.1"
   ui_kit:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../ui_kit"
       relative: true
