@@ -43,6 +43,7 @@ abstract class NewListPageViewModelBase extends NewListPageViewModel with Store,
 
   @action
   Future<void> _saveList({required String name}) async {
+    ObservableFuture
     try {
       submitStatus = const Upload.loading();
       await _listsRepository.addList(name: name);

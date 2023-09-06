@@ -21,14 +21,10 @@ class SelectedListViewModelImpl extends SelectedListViewModelBase with _$Selecte
   }
 }
 
-abstract class SelectedListViewModelBase extends SelectedListViewModel with Store {
+abstract class SelectedListViewModelBase extends SelectedListViewModel with Store, RunAsync {
   SelectedListViewModelBase(this._listsRepository);
 
   final ListsRepository _listsRepository;
-
-  @override
-  @observable
-  Object state = const SelectedListLoadingViewModelImpl();
 
   @override
   void init() {
@@ -58,42 +54,4 @@ abstract class SelectedListViewModelBase extends SelectedListViewModel with Stor
   }
 }
 
-class SelectedListLoadedViewModelImpl extends SelectedListLoadedViewModel {
-  const SelectedListLoadedViewModelImpl({
-    required VoidCallback onPressed,
-    required this.selectedListName,
-    required this.listId,
-  }) : _onPressed = onPressed;
 
-  final VoidCallback _onPressed;
-  final Object listId;
-
-  @override
-  final UiMessage selectedListName;
-
-  @override
-  void onPressed() {
-    _onPressed.call();
-  }
-}
-
-class SelectedListErrorViewModelImpl extends SelectedListErrorViewModel {
-  const SelectedListErrorViewModelImpl({
-    required VoidCallback onRetry,
-    required this.errorMessage,
-  }) : _onRetry = onRetry;
-
-  final VoidCallback _onRetry;
-
-  @override
-  final UiMessage errorMessage;
-
-  @override
-  void onRetry() {
-    _onRetry.call();
-  }
-}
-
-class SelectedListLoadingViewModelImpl extends SelectedListLoadingViewModel {
-  const SelectedListLoadingViewModelImpl();
-}

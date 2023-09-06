@@ -1,4 +1,6 @@
+import 'package:core/core.dart';
 import 'package:doit/di/dependencies.dart';
+import 'package:doit/features/lists/select/select_list_view_model.factory.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -12,91 +14,92 @@ abstract class RouteNames {
   static const home = 'home';
   static const newReminder = 'new-reminder';
   static const newList = 'new-list';
+  static const selectList = 'select-list';
 }
 
 GoRouter routerBuilder(BuildContext context) => GoRouter(
-      routes: [
-        GoRoute(
-          path: '/',
-          redirect: (_, state) {
-            final status = context.read<ValueNotifier<AuthorizationStatus>>().value;
-            switch (status) {
-              case AuthorizationStatus.processing:
-                return null;
-              case AuthorizationStatus.authorized:
-                return '/home';
-              case AuthorizationStatus.unauthorized:
-                return '/auth/sign-in';
-              case AuthorizationStatus.requireVerification:
-                return '/auth/email-verification';
-            }
-          },
-          builder: (context, state) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        ),
-        GoRoute(
-          name: RouteNames.signIn,
-          path: '/auth/sign-in',
-          builder: (context, state) {
-            return Provider<SignInViewModel>(
-              create: (_) => injector(),
-              dispose: (context, vm) => vm.dispose(),
-              builder: (context, _) => SignInPage(viewModel: Provider.of(context)),
-            );
-          },
-        ),
-        GoRoute(
-          name: RouteNames.signUp,
-          path: '/auth/sign-up',
-          builder: (context, state) {
-            return Provider<SignUpViewModel>(
-              create: (_) => injector(),
-              dispose: (context, vm) => vm.dispose(),
-              builder: (context, _) => SignUpPage(viewModel: Provider.of(context)),
-            );
-          },
-        ),
-        GoRoute(
-          name: RouteNames.emailVerification,
-          path: '/auth/email-verification',
-          builder: (context, state) {
-            return Provider<EmailVerificationViewModel>(
-              create: (_) => injector(),
-              dispose: (context, vm) => vm.dispose(),
-              builder: (context, _) => EmailVerificationPage(viewModel: Provider.of(context)),
-            );
-          },
-        ),
-        GoRoute(
-          path: '/home',
-          name: RouteNames.home,
-          builder: (context, state) {
-            return Provider<HomeViewModel>(
-              create: (_) => injector(),
-              dispose: (context, vm) => vm.dispose(),
-              builder: (context, _) => HomePage(viewModel: Provider.of(context)),
-            );
-          },
-        ),
-        GoRoute(
-          path: '/${RouteNames.newReminder}',
-          name: RouteNames.newReminder,
-          builder: (context, state) {
-            return Provider<NewReminderViewModel>(
-              create: (_) => injector(),
-              dispose: (context, vm) => vm.dispose(),
-              builder: (context, _) => NewReminderPage(
-                viewModel: Provider.of(context),
-              ),
-            );
-          },
-        ),
-        GoRoute(
-          path: '/${RouteNames.newList}',
-          name: RouteNames.newList,
+  routes: [
+    GoRoute(
+      path: '/',
+      redirect: (_, state) {
+        final status = context.read<ValueNotifier<AuthorizationStatus>>().value;
+        switch (status) {
+          case AuthorizationStatus.processing:
+            return null;
+          case AuthorizationStatus.authorized:
+            return '/home';
+          case AuthorizationStatus.unauthorized:
+            return '/auth/sign-in';
+          case AuthorizationStatus.requireVerification:
+            return '/auth/email-verification';
+        }
+      },
+      builder: (context, state) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    ),
+    GoRoute(
+      name: RouteNames.signIn,
+      path: '/auth/sign-in',
+      builder: (context, state) {
+        return Provider<SignInViewModel>(
+          create: (_) => injector(),
+          dispose: (context, vm) => vm.dispose(),
+          builder: (context, _) => SignInPage(viewModel: Provider.of(context)),
+        );
+      },
+    ),
+    GoRoute(
+      name: RouteNames.signUp,
+      path: '/auth/sign-up',
+      builder: (context, state) {
+        return Provider<SignUpViewModel>(
+          create: (_) => injector(),
+          dispose: (context, vm) => vm.dispose(),
+          builder: (context, _) => SignUpPage(viewModel: Provider.of(context)),
+        );
+      },
+    ),
+    GoRoute(
+      name: RouteNames.emailVerification,
+      path: '/auth/email-verification',
+      builder: (context, state) {
+        return Provider<EmailVerificationViewModel>(
+          create: (_) => injector(),
+          dispose: (context, vm) => vm.dispose(),
+          builder: (context, _) => EmailVerificationPage(viewModel: Provider.of(context)),
+        );
+      },
+    ),
+    GoRoute(
+      path: '/home',
+      name: RouteNames.home,
+      builder: (context, state) {
+        return Provider<HomeViewModel>(
+          create: (_) => injector(),
+          dispose: (context, vm) => vm.dispose(),
+          builder: (context, _) => HomePage(viewModel: Provider.of(context)),
+        );
+      },
+    ),
+    GoRoute(
+      path: '/${RouteNames.newReminder}',
+      name: RouteNames.newReminder,
+      builder: (context, state) {
+        return Provider<NewReminderViewModel>(
+          create: (_) => injector(),
+          dispose: (context, vm) => vm.dispose(),
+          builder: (context, _) => NewReminderPage(
+            viewModel: Provider.of(context),
+          ),
+        );
+      },
+    ),
+    GoRoute(
+      path: '/${RouteNames.newList}',
+      name: RouteNames.newList,
           builder: (context, state) {
             return Provider<NewListPageViewModel>(
               create: (_) => injector(),
@@ -107,22 +110,36 @@ GoRouter routerBuilder(BuildContext context) => GoRouter(
             );
           },
         ),
+        GoRoute(
+          path: '/${RouteNames.selectList}',
+          name: RouteNames.selectList,
+          builder: (context, state) {
+            final Object id = state.queryParams['id'].requireNotNull('id');
+            return Provider<SelectListViewModel>(
+              create: (_) => injector<SelectListViewModelFactory>().create(id),
+              dispose: (context, vm) => vm.dispose(),
+              builder: (context, _) => SelectListPage(
+                viewModel: Provider.of<SelectListViewModel>(context),
+              ),
+            );
+          },
+        ),
       ],
-      redirect: (context, state) {
-        final status = context.read<ValueNotifier<AuthorizationStatus>>().value;
-        switch (status) {
-          case AuthorizationStatus.processing:
-            return '/';
-          case AuthorizationStatus.authorized:
-            if (!state.location.startsWith('/auth')) return null;
-            return '/home';
-          case AuthorizationStatus.unauthorized:
-            if (state.location.startsWith('/auth')) return null;
-            return '/auth/sign-in';
-          case AuthorizationStatus.requireVerification:
-            if (state.location.startsWith('/auth/email-verification')) return null;
-            return '/auth/email-verification';
-        }
-      },
-      refreshListenable: context.read<ValueNotifier<AuthorizationStatus>>(),
-    );
+  redirect: (context, state) {
+    final status = context.read<ValueNotifier<AuthorizationStatus>>().value;
+    switch (status) {
+      case AuthorizationStatus.processing:
+        return '/';
+      case AuthorizationStatus.authorized:
+        if (!state.location.startsWith('/auth')) return null;
+        return '/home';
+      case AuthorizationStatus.unauthorized:
+        if (state.location.startsWith('/auth')) return null;
+        return '/auth/sign-in';
+      case AuthorizationStatus.requireVerification:
+        if (state.location.startsWith('/auth/email-verification')) return null;
+        return '/auth/email-verification';
+    }
+  },
+  refreshListenable: context.read<ValueNotifier<AuthorizationStatus>>(),
+);

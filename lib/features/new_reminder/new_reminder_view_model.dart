@@ -73,5 +73,7 @@ abstract class NewReminderViewModelBase extends NewReminderViewModel with Store 
   void onDetailsPressed() {}
 
   @override
-  void onListPressed() {}
+  void onListPressed() {
+    _router.pushNamed(RouteNames.selectList, queryParams: {'id'})
+  }
 }

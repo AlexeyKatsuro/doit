@@ -1,7 +1,7 @@
 import 'package:localization/localization.dart';
-import 'package:ui/src/common/icon_view_model.dart';
+import 'package:ui/src/common/index.dart';
 
-abstract class ListViewModel {
+abstract class ListViewModel extends ViewModel {
   const ListViewModel();
 
   IconType get icon;
